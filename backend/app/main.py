@@ -51,9 +51,12 @@ app.include_router(routes_dgca.router, prefix=settings.API_V1_STR)
 
 from src.engine.fisher_engine import fisher_engine
 
-# Mount Static Files
+# Mount Static and Vite Assets Files
 static_dir = os.path.join(os.path.dirname(__file__), "static")
 if os.path.exists(static_dir):
+    assets_dir = os.path.join(static_dir, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 # Chapter 5.3 Serving Layer Specifications: Dumb API, smart pipeline
