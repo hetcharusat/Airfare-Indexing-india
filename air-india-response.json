@@ -1,0 +1,796 @@
+{
+    "code": "0",
+    "message": "Success",
+    "status": "SUCCESS",
+    "hasError": false,
+    "data": {
+        "fares": [
+            {
+                "departureDate": "2027-01-25",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-01-26",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-01-27",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-01-28",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-01-29",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-01-30",
+                "totalPrice": {
+                    "base": "5439",
+                    "tax": "1484",
+                    "total": "6923",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-01-31",
+                "totalPrice": {
+                    "base": "5439",
+                    "tax": "1484",
+                    "total": "6923",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-01",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-02",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-03",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-04",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-05",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-06",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-07",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-08",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-09",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-10",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-11",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-12",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-13",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-14",
+                "totalPrice": {
+                    "base": "5439",
+                    "tax": "1484",
+                    "total": "6923",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-15",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-16",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-17",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-18",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-19",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-20",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-21",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-22",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-23",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-24",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-25",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-26",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-27",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-02-28",
+                "totalPrice": {
+                    "base": "5439",
+                    "tax": "1484",
+                    "total": "6923",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-01",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-02",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-03",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-04",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-05",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-06",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-07",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-08",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-09",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-10",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-11",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-12",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-13",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-14",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-15",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-16",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-17",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-18",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-19",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-20",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-21",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-22",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-23",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-24",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            },
+            {
+                "departureDate": "2027-03-25",
+                "totalPrice": {
+                    "base": "5219",
+                    "tax": "1703",
+                    "total": "6922",
+                    "currency": "INR",
+                    "priceLabel": {
+                        "value": "6.9",
+                        "unit": "K"
+                    }
+                }
+            }
+        ],
+        "origin": {
+            "airportCode": "DEL"
+        },
+        "destination": {
+            "airportCode": "BOM"
+        }
+    }
+}

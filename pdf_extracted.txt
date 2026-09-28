@@ -1,0 +1,351 @@
+OUTDATED _ PLEASE PARSE THE PDF 
+
+=== PAGE 1 ===
+Project APIx
+Airfare Price Index for India
+A Composition-Corrected Alternative to Naive Fare Averaging
+Smart India Hackathon 2026
+Problem Statement SIH26056
+Ministry of Statistics and Programme Implementation (MoSPI) / DGCA
+“Every naive average confuses two questions:
+what did prices do, and what did we happen to look at.
+This document is about never confusing those two questions again.”
+Internal Strategy Document — September 26, 2026
+
+=== PAGE 2 ===
+Contents
+1 The Goal 2
+1.1 What We Are Actually Building . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.2 Why This Problem Statement Exists . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.3 Why Most Teams Will Fail This Problem . . . . . . . . . . . . . . . . . . . . . . . . 2
+2 Our Philosophy 4
+2.1 The Core Insight (Read This Twice) . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2.2 Why This Is Defensible, Not Just “Sounds Smart” . . . . . . . . . . . . . . . . . . . 4
+2.3 The Three Pillars . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+3 Key Terms (The Words You Need to Actually Know) 6
+4 Working Strategy 8
+4.1 System Architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4.2 Stage-by-Stage Breakdown . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4.2.1 Stage 1 — Multi-Source Scraping . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4.2.2 Stage 2 — Cleaning & Normalization . . . . . . . . . . . . . . . . . . . . . . 8
+4.2.3 Stage 3 — Fixed Basket Construction . . . . . . . . . . . . . . . . . . . . . . 9
+4.2.4 Stage 4 — Index Engine . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+4.2.5 Stage 5 — Uncertainty & Decomposition . . . . . . . . . . . . . . . . . . . . 9
+4.2.6 Stage 6 — DGCA Reference Comparison . . . . . . . . . . . . . . . . . . . . 9
+4.3 The Two Charts That Carry the Entire Presentation . . . . . . . . . . . . . . . . . . 9
+4.4 Execution Timeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+5 Fallback Plans 12
+6 Judge Defense Script 13
+7 Closing Statement 14
+1
+
+=== PAGE 3 ===
+Chapter 1
+The Goal
+1.1 What We Are Actually Building
+We are building APIx (Airfare Price Index) : a system that scrapes Indian airline and OTA
+websites daily, and turns those noisy, dynamic-priced, partially-missing observations into a statisti-
+cally defensible index of how much flying actually costs in India — separated cleanly from changes
+in what happened to be observed .
+The one-sentence goal:
+Build the first Indian airfare index that can tell the difference between “fares actually went
+up” and “we just happened to see more expensive bookings this month.”
+1.2 Why This Problem Statement Exists
+The Consumer Price Index (CPI), published monthly by MoSPI/NSO, feeds directly into RBI’s
+inflation-targeting monetary policy. The ‘Transport and Communication’ sub-group still collects
+air-fare prices largely through manual, limited-outlet collection – even though over 90% of domestic
+tickets are now sold online through airlines and OTAs (MakeMyTrip, Yatra, EaseMyTrip, Cleartrip,
+Ixigo, Goibibo). Manual collection cannot capture fares that swing 200–400% in a single day
+depending on advance-booking window, day-of-week, and demand surges.
+The PS explicitly asks for an automated, high-frequency, scalable system that mirrors what a real
+Indian traveller actually pays – and asks teams to backtest at least 30 days of results against publicly
+available DGCA monthly average-fare data.
+1.3 Why Most Teams Will Fail This Problem
+Out of an estimated 40+ competing teams on this exact PS, the overwhelming majority will submit
+some variation of:
+scrape prices→ average them→ put on a dashboard → compare loosely to DGCA
+This is not wrong, but it is not an index in any rigorous economic sense. A simple average of
+whatever fares you happened to observe conflates two completely different phenomena:
+1. Real price movement – fares for the same product (same route, same carrier mix, same
+booking window) genuinely got more or less expensive.
+2. Composition / mix effects – your average moved because you happened to scrape more
+long-haul routes this week, or more people in your sample booked last-minute, or a low-cost
+2
+
+=== PAGE 4 ===
+SIH 2026 – Team Strategy Document SIH26056: APIx
+carrier added more inventory.
+A judge who understands index theory (and SIH panels usually include at least one such person)
+will ask exactly one devastating question of every naive team: “How do you know your 8% increase
+isn’t just because you scraped a different mix of flights this month?” Naive teams have no answer.
+We will.
+3
+
+=== PAGE 5 ===
+Chapter 2
+Our Philosophy
+2.1 The Core Insight (Read This Twice)
+An index is not an average. An index is a controlled comparison.
+The entire discipline of index-number theory (Laspeyres, Paasche, Fisher – all over a century
+old) exists to solve exactly one problem: how do you compare a “basket” of prices across time
+when the basket itself keeps changing? CPI, WPI, and every serious price index in the world
+is built this way. Nobody scrapes prices and simply averages them and calls it inflation. We
+refuse to do that either.
+This is our entire intellectual position, and it is the single thread that must run through every
+slide, every line of code, and every answer we give a judge. We are not a scraping project with a
+dashboard bolted on. We are an index-construction project that happens to need a scraper to get
+raw material.
+2.2 Why This Is Defensible, Not Just “Sounds Smart”
+We are explicitly not claiming to have invented a new algorithm. Laspeyres indexing is 100+ year
+old economics. Our defensibility does not come from novelty of method – it comes from being the
+only team that correctly applied a known, rigorous method to a domain that currently has none.
+What we are NOT claiming:
+ We are NOT claiming our index is more “accurate” than DGCA’s in some absolute sense.
+ We are NOT claiming AI/ML makes this novel – we use standard statistics correctly, not
+buzzwords.
+ We are NOT claiming our scraper is technologically special.
+What we ARE claiming:
+ We correct a real, quantifiable, explainable methodological error that a naive average
+makes.
+ We can show, with our own data, exactly how large that error is.
+ We can explain, in one sentence, why a fixed basket + lead-time stratification produces
+a more economically meaningful number.
+2.3 The Three Pillars
+Pillar 1: Fixed Basket, Not Free Sampling. We decide, in advance, which routes and
+which booking-window buckets constitute “the basket.” We never let the basket
+4
+
+=== PAGE 6 ===
+SIH 2026 – Team Strategy Document SIH26056: APIx
+silently drift based on what the scraper happens to find that day.
+Pillar 2: Decomposition Over Assertion. We never just report a number. We always
+show how much of the number is real price movement versus how much is composi-
+tion/mix effect. This decomposition chart is our single most important deliverable.
+Pillar 3: Reference, Not Ground Truth. DGCA data is a reference point we compare
+against and explain divergence from – never a ground truth we claim to match. We
+will be the only team in the room who does not overclaim DGCA validation.
+5
+
+=== PAGE 7 ===
+Chapter 3
+Key Terms (The Words You Need to
+Actually Know)
+This is the glossary. If you cannot explain every term in this chapter, in your own words, without
+looking at this document, you are not ready to present. A judge will use exactly this vocabulary to
+attack you.
+Airfare Price Index (APIx)
+Our project’s name for the number we produce daily: a single figure (or set of figures per
+route/segment) tracking how the cost of flying in India is changing over time, expressed rela-
+tive to a base value of 100 on day one.
+Basket
+The fixed set of routes (e.g., DEL-BOM, DEL-BLR, BOM-BLR, DEL-CCU, BLR-HYD, MAA-
+DEL) and booking-window buckets we track every single day, chosen once at the start using
+DGCA passenger-traffic data, and never silently changed.
+Booking Window / Lead-Time Bucket
+How many days before departure the fare is observed: T+1 (booking tomorrow), T+7, T+15,
+T+30, T+45. A T+1 fare and a T+45 fare for the identical flight are economically different
+products – one is distress/last-minute pricing, the other is advance-planning pricing. Pooling
+them together is a category error.
+Composition Effect / Mix Effect
+The part of an observed price change that comes purely from which flights you happened to
+sample – not from any actual price movement. Example: if this week you accidentally scraped
+more premium long-haul fares than last week, your raw average goes up even if every individual
+fare stayed exactly the same.
+Laspeyres Index
+An index formula that computes the cost of a fixed basket of goods (here: routes × booking-
+windows) using current prices, always weighted by base-period quantities/weights. This is pre-
+cisely the tool that prevents composition effects from contaminating the number. It is the same
+family of method used to construct CPI itself.
+Normalization
+The process of stripping out taxes, User Development Fee (UDF), and convenience charges so
+that what remains – the base fare – is genuinely comparable across different OTAs and airlines
+that display these components differently.
+Outlier / Missing-Data Handling
+Rules for excluding clearly erroneous observations (e.g. business-class fares mixed into an economy
+6
+
+=== PAGE 8 ===
+SIH 2026 – Team Strategy Document SIH26056: APIx
+basket, sold-out/cancelled listings) and for statistically handling gaps where a route/window
+combination simply has no observation on a given day.
+Bootstrap Confidence Interval
+A resampling technique that lets us report our index not as a single bare number, but as a number
+with an honest uncertainty band (e.g. “+3.3% ± 0.8%”). Almost no competing team will report
+uncertainty at all – this alone is a visible signal of rigor.
+Decomposition
+Splitting an observed index change into its component causes: how much came from real price
+inflation, how much from route-mix shift, how much from booking-window mix shift. This is the
+single chart that makes our submission different from every naive scrape-and-average team.
+DGCA Reference Comparison
+Comparing our daily/weekly index against DGCA’s publicly released monthly average domestic
+fares – explicitly framed as contextual validation, never as proof of correctness, since DGCA’s
+own methodology (unstratified, monthly, broad averaging) is structurally different from ours.
+Ethical / Rate-Limited Scraping
+Collecting data while respecting robots.txt, using reasonable request rates, and avoiding ag-
+gressive anti-bot circumvention – because the PS explicitly requires this, and because a judge can
+and will ask about it.
+7
+
+=== PAGE 9 ===
+Chapter 4
+Working Strategy
+4.1 System Architecture
+Figure 4.1: End-to-end pipeline. Every box in this diagram must correspond to actual working code
+by the PPT deadline – not a slide-only concept.
+4.2 Stage-by-Stage Breakdown
+4.2.1 Stage 1 — Multi-Source Scraping
+Collect fares daily from major airlines (IndiGo, Air India, Air India Express, Akasa Air, SpiceJet)
+and leading OTAs, across the fixed basket of routes and lead-time buckets. Technology choice
+(Scrapy, Selenium, Playwright) is secondary to consistency: the scraper must run every single day
+without gaps, because gaps are the single biggest threat to backtesting credibility.
+4.2.2 Stage 2 — Cleaning & Normalization
+Split base fare from taxes/UDF/convenience fees. Drop cancelled/sold-out listings. Flag and handle
+missing route×window combinations rather than silently ignoring them.
+8
+
+=== PAGE 10 ===
+SIH 2026 – Team Strategy Document SIH26056: APIx
+4.2.3 Stage 3 — Fixed Basket Construction
+Lock the basket (routes chosen via DGCA traffic-share data, lead-time buckets T+1/T+7/T+15/T+30/T+45)
+before serious data collection begins. This must be decided and documented in Week 1, not adjusted
+later based on what looks good.
+4.2.4 Stage 4 — Index Engine
+Compute two numbers side by side, every single day:
+ The naive average (what every other team will show).
+ Our Laspeyres, composition-corrected index (fixed weights, held constant).
+The gap between these two lines is our entire pitch.
+4.2.5 Stage 5 — Uncertainty & Decomposition
+Bootstrap a confidence band around the corrected index. Decompose any observed change into:
+real price movement vs. route-mix effect vs. booking-window-mix effect.
+4.2.6 Stage 6 — DGCA Reference Comparison
+Overlay DGCA’s monthly average fares against our daily/weekly index, and explicitly explain any
+divergence via known methodological differences (stratification vs. no stratification) – rather than
+claiming alignment proves correctness.
+4.3 The Two Charts That Carry the Entire Presentation
+Figure 4.2: Chart A: the naive average (red) vs. our composition-corrected index (blue), with
+uncertainty band. This single chart demonstrates, visually, that naive averaging overstates or
+misrepresents true fare movement.
+9
+
+=== PAGE 11 ===
+SIH 2026 – Team Strategy Document SIH26056: APIx
+Figure 4.3: Chart B: decomposition of an 8% naive fare increase into route-mix effect, booking-
+window-mix effect, and residual real price movement. This is the chart that answers “so what did
+you actually find” in one glance.
+10
+
+=== PAGE 12 ===
+SIH 2026 – Team Strategy Document SIH26056: APIx
+4.4 Execution Timeline
+Figure 4.4: Data collection must start in Week 0 – it is the one resource that cannot be compressed
+later. Everything else can be built in parallel or compressed if needed; days of missed scraping
+cannot be recovered.
+Timeframe What Must Be Done
+Week 0 (immedi-
+ately)
+Lock the route basket and lead-time buckets. Stand up the
+scraper and start continuous daily collection – this must not stop,
+even while other stages are being built.
+Weeks 1–2 Build and validate the normalization pipeline; confirm base-fare
+extraction is clean across all sources.
+Weeks 2.5–4 Implement both index formulas (naive vs. fixed-basket
+Laspeyres); produce the divergence chart as an internal proof-
+of-concept.
+Weeks 4–4.5 Add bootstrap uncertainty bands; pull DGCA monthly data and
+build the reference comparison with explicit divergence explana-
+tion.
+Final week Build the PPT entirely around the two core charts (naive vs.
+corrected; decomposition). Rehearse judge Q&A (Chapter 5)
+until every answer is instant and unhesitating.
+11
+
+=== PAGE 13 ===
+Chapter 5
+Fallback Plans
+Every part of this plan has a failure mode. Below is what we do when things break — because in
+a 36-hour-adjacent, scraping-dependent project, something will break.
+If this fails... ...we fall back to this
+An airline/OTA site blocks
+scraping or changes its lay-
+out mid-project
+Immediately drop that single source from the basket rather
+than stalling the whole pipeline; document the gap trans-
+parently in the PPT as a known, handled limitation, not a
+hidden failure.
+We don’t get 30 full days of
+clean data before the dead-
+line
+Present the index construction methodology as fully built
+and validated on whatever real days we do have (even 10–
+15), and explicitly state the backtest will extend automat-
+ically once more days accumulate. Never fabricate missing
+days.
+Live scraping demo fails
+during the actual presenta-
+tion (network, CAPTCHA,
+site downtime)
+Never rely on a live demo as the primary proof.Pre-
+record a demo video and prepare a static dataset snapshot
+as the default presentation mode; live scraping is shown
+only as an optional bonus, never as the thing the whole
+talk depends on.
+A judge disputes that our
+DGCA divergence is mean-
+ingful rather than just “be-
+ing wrong”
+Have the exact stratification argument ready verbatim (see
+Chapter 5) – this is the single most likely attack and must
+never be answered with hesitation.
+We can’t cover every route
+DGCA tracks
+Be explicit that our basket is a representative subset se-
+lected by traffic share, not an attempt to replicate DGCA’s
+full coverage – scope honesty beats overclaiming coverage
+we don’t have.
+Team member unavailable
+/ technical blocker close to
+deadline
+The two-chart core (naive vs. corrected; decomposition)
+is the non-negotiable minimum viable deliverable. Every-
+thing else (dashboard polish, API, extra routes) is optional
+scope that can be cut without damaging the core argument.
+The one fallback rule above all others: If forced to cut scope under time pressure, cut
+breadth (fewer routes, fewer OTAs, shorter history) before ever cutting rigor (the decompo-
+sition, the uncertainty band, the honest DGCA framing). A smaller, rigorous index beats a
+large, naive one every time a judge asks a real question.
+12
+
+=== PAGE 14 ===
+Chapter 6
+Judge Defense Script
+These are rehearsed, verbatim-ready answers to the most likely hostile questions. Every team
+member should be able to deliver these without hesitation.
+Q: “Isn’t this just a scraper with a dashboard?”
+A: “A scraper reports what prices were observed. We report what actually changed – holding
+the observation mix constant. Here’s the gap between the naive number and our corrected
+number, and here’s exactly why that gap exists.”
+Q: “How do you know your composition correction is even right?”
+A: “We fix the basket and its weights before collection starts – exactly the same Laspeyres-
+family methodology MoSPI already uses for other CPI sub-groups. We’re extending the same
+rigor to a sub-group that currently has none.”
+Q: “Your number doesn’t match DGCA’s – so you’re wrong?”
+A: “DGCA publishes monthly, unstratified averages. We stratify by booking window because
+a T+1 fare and a T+45 fare for the same route are not the same economic product. The
+divergence is the finding, not the error.”
+Q: “With 40+ teams on this exact problem, why should we pick you?”
+A: “Every other team will show you an average. We are the only team that can show you the
+difference between an average and an index – and quantify, in points, how much that difference
+is worth.”
+13
+
+=== PAGE 15 ===
+Chapter 7
+Closing Statement
+“CPI currently treats a last-minute Delhi–Mumbai fare and a
+booked-45-days-ahead fare as the same data point. We built an
+index that doesn’t make that mistake – and we can show
+exactly how much that mistake is currently costing India’s
+inflation numbers.”
+This is the sentence that opens the presentation. Everything in this document exists to make that
+sentence true, defensible, and impossible for a judge to dismiss as marketing.
+14

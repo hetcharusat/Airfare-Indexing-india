@@ -1,0 +1,10 @@
+https://github.com/dhairya903/Flights-Dataset  - historical dataseet , 4 year older , can be useful
+
+# IndiGo API endpoint reference
+# DUFFEL_API_KEY should be set via environment variable
+
+
+https://www.spicejet.com/search?from=DEL&to=BOM&tripType=1&departure=2026-10-30&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/    - query in url , reposnes hmtl may be idk
+
+
+https://api.airindia.com/airline-fares/v1/search  - api url mabe of air india

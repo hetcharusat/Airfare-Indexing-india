@@ -1,0 +1,346 @@
+{
+  "cycle_count": 1217,
+  "epsilon": 0.05,
+  "daily_ingested_today": 8689,
+  "all_routes": [
+    "DEL-BOM",
+    "BOM-DEL",
+    "DEL-BLR",
+    "BOM-BLR",
+    "DEL-CCU",
+    "BLR-HYD",
+    "MAA-DEL",
+    "DEL-PNQ",
+    "DEL-AYJ",
+    "DEL-DED",
+    "GOI-BLR",
+    "BLR-IXG",
+    "BOM-KLH",
+    "BOM-GOI",
+    "DEL-GOI",
+    "DEL-PAT",
+    "BOM-PAT",
+    "DEL-IXB",
+    "BLR-NAG",
+    "HYD-TIR",
+    "BBI-JRG",
+    "CCU-COH",
+    "BBI-VTZ",
+    "IXC-HSS",
+    "DEL-HSS",
+    "DEL-IXD",
+    "GOI-HYD",
+    "GOI-PNQ",
+    "GOI-IXG",
+    "GAU-TEZ",
+    "GAU-PAS",
+    "GAU-RUP"
+  ],
+  "total_discovered_routes": 32,
+  "discovery_log": [
+    {
+      "timestamp": "2026-09-28 01:34:48",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Air Taxi India",
+      "routes_added": [
+        "DEL-HSS"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:34:45",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Zoom Air",
+      "routes_added": [
+        "DEL-IXD"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:34:41",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-BLR"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:34:40",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "IndiaOne Air",
+      "routes_added": [
+        "BBI-JRG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:34:33",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Star Air Regional",
+      "routes_added": [
+        "BLR-IXG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:34:33",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "FlyBig",
+      "routes_added": [
+        "GAU-RUP"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:34:32",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "IndiaOne Air",
+      "routes_added": [
+        "BBI-VTZ"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:33:17",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Zoom Air",
+      "routes_added": [
+        "DEL-AYJ"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:29:55",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-IXG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:29:47",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-PNQ"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:29:43",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "IndiaOne Air",
+      "routes_added": [
+        "BBI-VTZ"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:29:40",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-HYD"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:29:39",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Star Air Regional",
+      "routes_added": [
+        "BLR-NAG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:29:35",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Star Air Regional",
+      "routes_added": [
+        "HYD-TIR"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:28:23",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-BLR"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:27:59",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "IndiaOne Air",
+      "routes_added": [
+        "CCU-COH"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:26:24",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Star Air Regional",
+      "routes_added": [
+        "BLR-NAG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:26:17",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "IndiaOne Air",
+      "routes_added": [
+        "BBI-VTZ"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:25:57",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "IndiaOne Air",
+      "routes_added": [
+        "CCU-COH"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:25:56",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-BLR"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:25:45",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-IXG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:25:32",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "FlyBig",
+      "routes_added": [
+        "GAU-RUP"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:25:28",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Zoom Air",
+      "routes_added": [
+        "DEL-IXD"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:25:23",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Air Taxi India",
+      "routes_added": [
+        "DEL-HSS"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:25:20",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Star Air Regional",
+      "routes_added": [
+        "BLR-NAG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:24:44",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Fly91 Expansion",
+      "routes_added": [
+        "GOI-HYD"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:24:40",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Star Air Regional",
+      "routes_added": [
+        "BOM-KLH"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:24:24",
+      "event": "DISCOVERED_NEW_CARRIER",
+      "carrier": "IndiaOne Air",
+      "routes_added": [
+        "BBI-JRG",
+        "CCU-COH",
+        "BBI-VTZ"
+      ],
+      "strategy": "Autonomous web spidering of DGCA slot filings & OTA pricing feeds",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:24:16",
+      "event": "DISCOVERED_NEW_ROUTE",
+      "carrier": "Star Air Regional",
+      "routes_added": [
+        "BLR-IXG"
+      ],
+      "strategy": "Deep calendar scan identified seasonal scheduled frequency",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    },
+    {
+      "timestamp": "2026-09-28 01:24:04",
+      "event": "DISCOVERED_NEW_CARRIER",
+      "carrier": "Zoom Air",
+      "routes_added": [
+        "DEL-AYJ",
+        "DEL-DED",
+        "DEL-IXD"
+      ],
+      "strategy": "Autonomous web spidering of DGCA slot filings & OTA pricing feeds",
+      "status": "INTEGRATED_IN_DISPATCHER"
+    }
+  ]
+}

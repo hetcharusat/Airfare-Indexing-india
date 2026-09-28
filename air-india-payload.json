@@ -1,0 +1,15 @@
+fetch("https://api.airindia.com/airline-fares/v1/search",
+{
+    "headers": {
+        "accept": "application/json, text/plain, */*",
+        "accept-language": "en-US,en;q=0.9",
+        "content-type": "application/json",
+        "ocp-apim-subscription-key": "8ea658f3ac1e44cca129d7ed252d4c42",
+        "priority": "u=1, i"
+    },
+    "referrer": "https://www.airindia.com/",
+    "body": "{\"classType\":\"ECONOMY\",\"concessionType\":null,\"itinerary\":{\"origin\":\"DEL\",\"destination\":\"BOM\",\"departureDate\":\"2027-01-25\",\"returnDate\":null,\"originCountryCode\":\"IN\"},\"tripInfo\":{\"duration\":null,\"range\":60,\"durationFlexibility\":null}}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "omit"
+});

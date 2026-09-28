@@ -1,0 +1,466 @@
+{
+  "decision_log": [
+    {
+      "timestamp": "2026-09-28 01:34:08",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for BOM-BLR (T+15) verified with 12 flights (Grade: A (Optimal Diversity), Score: 92.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.7897
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:34:06",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BLR (T+1) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9183
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:34:05",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+7) verified with 9 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9183
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:34:04",
+      "role": "AI Supervisor (Executive Dispatcher)",
+      "thought": "Starting Hourly Cycle #25. Phase: Overnight Calibration & Matrix Refresh. Target: 220 obs. Cultural alerts: 1 active.",
+      "action": "EXECUTE_HOURLY_CYCLE",
+      "details": {
+        "current_hour": "01:00 IST",
+        "diurnal_phase": "Overnight Calibration & Matrix Refresh",
+        "target_observations": 220,
+        "current_progress": 172,
+        "completion_pct": 78.2,
+        "festival_alerts": [
+          "Durga Puja / Navratri / Dussehra in 22 days (Surge: 2.6x on DEL-CCU, BOM-CCU, BLR-CCU)"
+        ],
+        "priority_corridors": [
+          "DEL-BOM",
+          "DEL-BLR",
+          "BOM-BLR",
+          "DEL-CCU"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:33:02",
+      "role": "AI Supervisor (Econometric Engine)",
+      "thought": "Ingestion batch committed. Recalculated MoSPI Laspeyres Index, Paasche Index, and Kitagawa decomposition series.",
+      "action": "RECALCULATE_INDICES_SUCCESS",
+      "details": {
+        "new_observations": 36,
+        "hour_total": 172
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:30:59",
+      "role": "AI Supervisor (Interactive Pipeline)",
+      "thought": "Interactive trace completed for DEL-BOM (T+7). Added 9 flights. Laspeyres shifted by +0.125 pts.",
+      "action": "INTERACTIVE_TRACE_EXECUTED",
+      "details": {
+        "laspeyres_delta": 0.125,
+        "rows_added": 9
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:30:30",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for BOM-BLR (T+30) verified with 12 flights (Grade: A (Optimal Diversity), Score: 100.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.807
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:30:28",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BLR (T+15) verified with 12 flights (Grade: D/F (Severe Sampling Bias), Score: 20.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.0
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:30:28",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+1) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.8113
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:30:26",
+      "role": "AI Supervisor (Executive Dispatcher)",
+      "thought": "Starting Hourly Cycle #24. Phase: Overnight Calibration & Matrix Refresh. Target: 220 obs. Cultural alerts: 1 active.",
+      "action": "EXECUTE_HOURLY_CYCLE",
+      "details": {
+        "current_hour": "01:00 IST",
+        "diurnal_phase": "Overnight Calibration & Matrix Refresh",
+        "target_observations": 220,
+        "current_progress": 136,
+        "completion_pct": 61.8,
+        "festival_alerts": [
+          "Durga Puja / Navratri / Dussehra in 22 days (Surge: 2.6x on DEL-CCU, BOM-CCU, BLR-CCU)"
+        ],
+        "priority_corridors": [
+          "DEL-BOM",
+          "DEL-BLR",
+          "BOM-BLR",
+          "DEL-CCU"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:29:46",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+7) verified with 9 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9183
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:29:25",
+      "role": "AI Supervisor (Econometric Engine)",
+      "thought": "Ingestion batch committed. Recalculated MoSPI Laspeyres Index, Paasche Index, and Kitagawa decomposition series.",
+      "action": "RECALCULATE_INDICES_SUCCESS",
+      "details": {
+        "new_observations": 36,
+        "hour_total": 136
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:25:55",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for BOM-BLR (T+30) verified with 12 flights (Grade: A (Optimal Diversity), Score: 100.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.807
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:25:53",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BLR (T+30) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 72.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.7755
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:25:52",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+15) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9799
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:25:51",
+      "role": "AI Supervisor (Executive Dispatcher)",
+      "thought": "Starting Hourly Cycle #23. Phase: Overnight Calibration & Matrix Refresh. Target: 220 obs. Cultural alerts: 1 active.",
+      "action": "EXECUTE_HOURLY_CYCLE",
+      "details": {
+        "current_hour": "01:00 IST",
+        "diurnal_phase": "Overnight Calibration & Matrix Refresh",
+        "target_observations": 220,
+        "current_progress": 100,
+        "completion_pct": 45.5,
+        "festival_alerts": [
+          "Durga Puja / Navratri / Dussehra in 22 days (Surge: 2.6x on DEL-CCU, BOM-CCU, BLR-CCU)"
+        ],
+        "priority_corridors": [
+          "DEL-BOM",
+          "DEL-BLR",
+          "BOM-BLR",
+          "DEL-CCU"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:24:50",
+      "role": "AI Supervisor (Econometric Engine)",
+      "thought": "Ingestion batch committed. Recalculated MoSPI Laspeyres Index, Paasche Index, and Kitagawa decomposition series.",
+      "action": "RECALCULATE_INDICES_SUCCESS",
+      "details": {
+        "new_observations": 32,
+        "hour_total": 100
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:24:44",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for BOM-BLR (T+1) verified with 8 flights (Grade: C (Marginal Narrowing), Score: 72.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.8194
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:24:43",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BLR (T+30) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 72.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.7755
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:24:42",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+15) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9799
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:24:40",
+      "role": "AI Supervisor (Executive Dispatcher)",
+      "thought": "Starting Hourly Cycle #22. Phase: Overnight Calibration & Matrix Refresh. Target: 220 obs. Cultural alerts: 1 active.",
+      "action": "EXECUTE_HOURLY_CYCLE",
+      "details": {
+        "current_hour": "01:00 IST",
+        "diurnal_phase": "Overnight Calibration & Matrix Refresh",
+        "target_observations": 220,
+        "current_progress": 68,
+        "completion_pct": 30.9,
+        "festival_alerts": [
+          "Durga Puja / Navratri / Dussehra in 22 days (Surge: 2.6x on DEL-CCU, BOM-CCU, BLR-CCU)"
+        ],
+        "priority_corridors": [
+          "DEL-BOM",
+          "DEL-BLR",
+          "BOM-BLR",
+          "DEL-CCU"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:23:40",
+      "role": "AI Supervisor (Econometric Engine)",
+      "thought": "Ingestion batch committed. Recalculated MoSPI Laspeyres Index, Paasche Index, and Kitagawa decomposition series.",
+      "action": "RECALCULATE_INDICES_SUCCESS",
+      "details": {
+        "new_observations": 32,
+        "hour_total": 68
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:23:37",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for BOM-BLR (T+1) verified with 8 flights (Grade: C (Marginal Narrowing), Score: 72.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.8194
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:23:36",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BLR (T+15) verified with 12 flights (Grade: D/F (Severe Sampling Bias), Score: 20.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.0
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:23:35",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+15) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9799
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:23:34",
+      "role": "AI Supervisor (Executive Dispatcher)",
+      "thought": "Starting Hourly Cycle #21. Phase: Overnight Calibration & Matrix Refresh. Target: 220 obs. Cultural alerts: 1 active.",
+      "action": "EXECUTE_HOURLY_CYCLE",
+      "details": {
+        "current_hour": "01:00 IST",
+        "diurnal_phase": "Overnight Calibration & Matrix Refresh",
+        "target_observations": 220,
+        "current_progress": 36,
+        "completion_pct": 16.4,
+        "festival_alerts": [
+          "Durga Puja / Navratri / Dussehra in 22 days (Surge: 2.6x on DEL-CCU, BOM-CCU, BLR-CCU)"
+        ],
+        "priority_corridors": [
+          "DEL-BOM",
+          "DEL-BLR",
+          "BOM-BLR",
+          "DEL-CCU"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:22:33",
+      "role": "AI Supervisor (Econometric Engine)",
+      "thought": "Ingestion batch committed. Recalculated MoSPI Laspeyres Index, Paasche Index, and Kitagawa decomposition series.",
+      "action": "RECALCULATE_INDICES_SUCCESS",
+      "details": {
+        "new_observations": 36,
+        "hour_total": 36
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:22:31",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for BOM-BLR (T+15) verified with 12 flights (Grade: A (Optimal Diversity), Score: 92.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.7897
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:22:30",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BLR (T+15) verified with 12 flights (Grade: D/F (Severe Sampling Bias), Score: 20.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.0
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:22:29",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+15) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9799
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:22:28",
+      "role": "AI Supervisor (Executive Dispatcher)",
+      "thought": "Starting Hourly Cycle #20. Phase: Overnight Calibration & Matrix Refresh. Target: 220 obs. Cultural alerts: 1 active.",
+      "action": "EXECUTE_HOURLY_CYCLE",
+      "details": {
+        "current_hour": "01:00 IST",
+        "diurnal_phase": "Overnight Calibration & Matrix Refresh",
+        "target_observations": 220,
+        "current_progress": 0,
+        "completion_pct": 0.0,
+        "festival_alerts": [
+          "Durga Puja / Navratri / Dussehra in 22 days (Surge: 2.6x on DEL-CCU, BOM-CCU, BLR-CCU)"
+        ],
+        "priority_corridors": [
+          "DEL-BOM",
+          "DEL-BLR",
+          "BOM-BLR",
+          "DEL-CCU"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:21:58",
+      "role": "AI Supervisor (Interactive Pipeline)",
+      "thought": "Interactive trace completed for DEL-BOM (T+7). Added 9 flights. Laspeyres shifted by +0.124 pts.",
+      "action": "INTERACTIVE_TRACE_EXECUTED",
+      "details": {
+        "laspeyres_delta": 0.124,
+        "rows_added": 9
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:21:56",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+7) verified with 9 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.8528
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:16:52",
+      "role": "AI Supervisor (Econometric Engine)",
+      "thought": "Ingestion batch committed. Recalculated MoSPI Laspeyres Index, Paasche Index, and Kitagawa decomposition series.",
+      "action": "RECALCULATE_INDICES_SUCCESS",
+      "details": {
+        "new_observations": 36,
+        "hour_total": 169
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:16:46",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for BOM-BLR (T+30) verified with 12 flights (Grade: A (Optimal Diversity), Score: 100.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.807
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:16:45",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BLR (T+1) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.9183
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:16:44",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+30) verified with 12 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.6567
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:16:43",
+      "role": "AI Supervisor (Executive Dispatcher)",
+      "thought": "Starting Hourly Cycle #19. Phase: Overnight Calibration & Matrix Refresh. Target: 220 obs. Cultural alerts: 1 active.",
+      "action": "EXECUTE_HOURLY_CYCLE",
+      "details": {
+        "current_hour": "01:00 IST",
+        "diurnal_phase": "Overnight Calibration & Matrix Refresh",
+        "target_observations": 220,
+        "current_progress": 133,
+        "completion_pct": 60.5,
+        "festival_alerts": [
+          "Durga Puja / Navratri / Dussehra in 22 days (Surge: 2.6x on DEL-CCU, BOM-CCU, BLR-CCU)"
+        ],
+        "priority_corridors": [
+          "DEL-BOM",
+          "DEL-BLR",
+          "BOM-BLR",
+          "DEL-CCU"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:16:40",
+      "role": "AI Supervisor (Interactive Pipeline)",
+      "thought": "Interactive trace completed for DEL-BOM (T+7). Added 9 flights. Laspeyres shifted by +0.000 pts.",
+      "action": "INTERACTIVE_TRACE_EXECUTED",
+      "details": {
+        "laspeyres_delta": 0.0,
+        "rows_added": 9
+      }
+    },
+    {
+      "timestamp": "2026-09-28 01:16:03",
+      "role": "AI Supervisor (Data Quality Critic)",
+      "thought": "Batch for DEL-BOM (T+7) verified with 9 flights (Grade: C (Marginal Narrowing), Score: 64.0/100). Approved for index calculation.",
+      "action": "APPROVE_FOR_INDEX",
+      "details": {
+        "shannon_entropy": 0.8528
+      }
+    }
+  ],
+  "is_frozen": true,
+  "learning_cycle": 25
+}
