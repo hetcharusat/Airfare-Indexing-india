@@ -278,6 +278,17 @@ export default function App() {
           </button>
 
           <a
+            href="/terminal"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-secondary"
+            style={{ textDecoration: 'none', fontSize: '0.78rem', padding: '6px 12px' }}
+          >
+            <span>MoSPI Terminal</span>
+            <ArrowUpRight size={13} />
+          </a>
+
+          <a
             href="/docs"
             target="_blank"
             rel="noreferrer"

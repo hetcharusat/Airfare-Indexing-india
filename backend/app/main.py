@@ -84,6 +84,15 @@ def get_spec_reconciliation():
     """Validation Protocol: Reconciling with DGCA (Chapter 6 Bridge Series)."""
     return fisher_engine.generate_dgca_reconciliation()
 
+@app.get("/terminal")
+@app.get("/mospi")
+def mospi_terminal():
+    """Serves the official sovereign MoSPI / DGCA Economic Index Terminal."""
+    mospi_file = os.path.join(static_dir, "mospi_terminal.html")
+    if os.path.exists(mospi_file):
+        return FileResponse(mospi_file)
+    return FileResponse(os.path.join(static_dir, "index.html"))
+
 @app.get("/")
 def root():
     index_file = os.path.join(static_dir, "index.html")
@@ -92,6 +101,7 @@ def root():
     return {
         "message": "Project APIx: Economic Price Index Terminal (MoSPI / DGCA)",
         "docs": "/docs",
+        "terminal": "/terminal",
         "health": "/api/v1/health"
     }
 

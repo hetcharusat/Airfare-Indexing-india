@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INDAIR | राष्ट्रीय विमान किराया मूल्य सूचकांक • National Airfare Price Index • MoSPI / DGCA</title>
+  
+  <!-- GIGW 3.0 Typography: Noto Sans, Inter, JetBrains Mono, Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- 1. National Tiranga Ribbon (GIGW 3.0 Standard) -->
+  <div class="tiranga-strip"></div>
+
+  <!-- 2. Official Government of India Utility Header (UX4G Standard) -->
+  <div class="goi-top-bar">
+    <div class="goi-top-left">
+      <div class="goi-emblem-mini">
+        <svg viewBox="0 0 100 120" width="18" height="22" class="mini-lion-svg">
+          <circle cx="50" cy="88" r="14" fill="none" stroke="#f59e0b" stroke-width="2"/>
+          <circle cx="50" cy="88" r="3" fill="#f59e0b"/>
+          <path d="M50 12 C42 12 35 18 35 28 C35 38 42 45 42 55 L58 55 C58 45 65 38 65 28 C65 18 58 12 50 12 Z" fill="#f59e0b"/>
+          <rect x="22" y="70" width="56" height="6" rx="2" fill="#f59e0b"/>
+        </svg>
+      </div>
+      <span class="goi-text-bold">भारत सरकार</span>
+      <span class="goi-text-en">GOVERNMENT OF INDIA</span>
+      <span class="goi-divider">|</span>
+      <span class="goi-ministry">सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय (MoSPI)</span>
+      <span class="goi-divider">|</span>
+      <span class="goi-agency">DGCA नागर विमानन महानिदेशालय</span>
+    </div>
+
+    <div class="goi-top-right">
+      <div class="official-seal-pill">
+        <span class="pulse-indicator"></span>
+        <span>OFFICIAL STATISTICAL BENCHMARK • SIH26056</span>
+      </div>
+      <span class="goi-live-clock" id="goi-clock">IST (UTC+05:30)</span>
+      <a href="/" class="goi-switch-cockpit" title="Return to Live Cockpit">
+        <span>⚡ Scraper Cockpit</span> ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- 3. Financial Moving Ticker Tape -->
+  <div class="ticker-tape-container">
+    <div class="ticker-label-badge">
+      <span>LIVE INDEX TICKER</span>
+    </div>
+    <div class="ticker-tape-track">
+      <div class="ticker-item"><span class="ticker-tag">INDAIR-FISHER:</span> <span class="ticker-val">106.13</span> <span class="ticker-up">▲ +6.13 (+6.13%)</span></div>
+      <div class="ticker-item"><span class="ticker-tag">INDAIR-LASPEYRES:</span> <span class="ticker-val">106.03</span> <span class="ticker-up">▲ +6.03%</span></div>
+      <div class="ticker-item"><span class="ticker-tag">INDAIR-PAASCHE:</span> <span class="ticker-val">106.23</span> <span class="ticker-up">▲ +6.23%</span></div>
+      <div class="ticker-item"><span class="ticker-tag">BORTKIEWICZ COV:</span> <span class="ticker-val">-0.0023</span> <span class="ticker-up">(Subst. Validated)</span></div>
+      <div class="ticker-item"><span class="ticker-tag">SPREAD (L-P):</span> <span class="ticker-val">-0.20 pts</span></div>
+      <div class="ticker-item"><span class="ticker-tag">DEL-BOM TRUNK:</span> <span class="ticker-val">107.40</span> <span class="ticker-up">▲ +7.4%</span></div>
+      <div class="ticker-item"><span class="ticker-tag">BASE PERIOD:</span> <span class="ticker-gold">2026-07-01 = 100.00</span></div>
+      <div class="ticker-item"><span class="ticker-tag">DGCA BENCHMARK:</span> <span class="ticker-val">₹5,420.00</span></div>
+      <!-- Duplicate for seamless continuous ticker loop -->
+      <div class="ticker-item"><span class="ticker-tag">INDAIR-FISHER:</span> <span class="ticker-val">106.13</span> <span class="ticker-up">▲ +6.13 (+6.13%)</span></div>
+      <div class="ticker-item"><span class="ticker-tag">INDAIR-LASPEYRES:</span> <span class="ticker-val">106.03</span> <span class="ticker-up">▲ +6.03%</span></div>
+      <div class="ticker-item"><span class="ticker-tag">INDAIR-PAASCHE:</span> <span class="ticker-val">106.23</span> <span class="ticker-up">▲ +6.23%</span></div>
+      <div class="ticker-item"><span class="ticker-tag">BORTKIEWICZ COV:</span> <span class="ticker-val">-0.0023</span> <span class="ticker-up">(Subst. Validated)</span></div>
+      <div class="ticker-item"><span class="ticker-tag">SPREAD (L-P):</span> <span class="ticker-val">-0.20 pts</span></div>
+      <div class="ticker-item"><span class="ticker-tag">DEL-BOM TRUNK:</span> <span class="ticker-val">107.40</span> <span class="ticker-up">▲ +7.4%</span></div>
+    </div>
+  </div>
+
+  <!-- 4. Official Masthead Header (MoSPI / DGCA Authority) -->
+  <header class="top-nav">
+    <div class="brand-section">
+      <div class="emblem-container">
+        <!-- Official State Emblem of India Lion Capital SVG -->
+        <svg viewBox="0 0 100 120" width="46" height="55" class="national-emblem-svg">
+          <circle cx="50" cy="88" r="14" fill="none" stroke="#f59e0b" stroke-width="2"/>
+          <circle cx="50" cy="88" r="3" fill="#f59e0b"/>
+          <path d="M50 12 C42 12 35 18 35 28 C35 38 42 45 42 55 L58 55 C58 45 65 38 65 28 C65 18 58 12 50 12 Z" fill="#f59e0b"/>
+          <path d="M30 26 C24 28 20 34 20 42 C20 52 26 58 35 62 L38 52 C32 50 28 46 28 42 C28 36 32 32 36 30 Z" fill="#d97706"/>
+          <path d="M70 26 C76 28 80 34 80 42 C80 52 74 58 65 62 L62 52 C68 50 72 46 72 42 C72 36 68 32 64 30 Z" fill="#d97706"/>
+          <rect x="22" y="70" width="56" height="7" rx="2" fill="#f59e0b"/>
+          <rect x="18" y="104" width="64" height="6" rx="2" fill="#d97706"/>
+          <text x="50" y="117" text-anchor="middle" font-family="'Noto Sans', sans-serif" font-size="7.5" font-weight="700" fill="#fcd34d" letter-spacing="1">सत्यमेव जयते</text>
+        </svg>
+      </div>
+      
+      <div class="brand-titles">
+        <span class="gov-agency">राष्ट्रीय सांख्यिकी कार्यालय (NSO) • NATIONAL STATISTICAL OFFICE • MoSPI</span>
+        <h1 class="portal-main-title">INDAIR | राष्ट्रीय विमान किराया मूल्य सूचकांक</h1>
+        <span class="portal-sub-title">REAL-TIME AIRFARE PRICE INDEX OF INDIA • OFFICIAL PRICE STATISTICAL PORTAL</span>
+      </div>
+    </div>
+
+    <div class="header-right-meta">
+      <div class="stat-meta-pill">
+        <span class="meta-label">STATISTICAL FRAMEWORK</span>
+        <span class="meta-val">IMF / UN SNA SUPERLATIVE FISHER</span>
+      </div>
+      <div class="stat-meta-pill">
+        <span class="meta-label">FREQUENCY</span>
+        <span class="meta-val">DAILY CHAINED (00:00 UTC)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 5. Executive KPI Hero Board -->
+  <section class="hero-index-board">
+    <div class="kpi-grid">
+      <!-- 1. Headline Fisher Ideal Index -->
+      <div class="kpi-card kpi-fisher">
+        <div class="kpi-header">
+          <span class="kpi-title">HEADLINE FISHER IDEAL INDEX (Fₜ)</span>
+          <span class="kpi-badge badge-saffron">SUPERLATIVE</span>
+        </div>
+        <div class="kpi-value" id="hero-fisher-val">106.13</div>
+        <div class="kpi-delta" id="hero-fisher-delta"><span>▲ +6.13 (+6.13%)</span></div>
+        <div class="kpi-footnote">Geometric mean of Laspeyres and Paasche. Factor &amp; Time Reversible.</div>
+      </div>
+
+      <!-- 2. Laspeyres Fixed-Basket -->
+      <div class="kpi-card kpi-laspeyres">
+        <div class="kpi-header">
+          <span class="kpi-title">LASPEYRES INDEX (Lₜ)</span>
+          <span class="kpi-badge badge-green">BASE WEIGHTS</span>
+        </div>
+        <div class="kpi-value" id="kpi-laspeyres">106.03</div>
+        <div class="kpi-delta" id="kpi-laspeyres-delta"><span class="delta-positive">+6.03% vs Base</span></div>
+        <div class="kpi-footnote">Fixed base basket (w_i^(0)). Upper economic bound.</div>
+      </div>
+
+      <!-- 3. Paasche Dynamic -->
+      <div class="kpi-card kpi-paasche">
+        <div class="kpi-header">
+          <span class="kpi-title">PAASCHE INDEX (Pₜ)</span>
+          <span class="kpi-badge badge-blue">CURRENT WEIGHTS</span>
+        </div>
+        <div class="kpi-value" id="kpi-paasche">106.23</div>
+        <div class="kpi-delta" id="kpi-paasche-delta"><span class="delta-positive">+6.23% vs Base</span></div>
+        <div class="kpi-footnote">Harmonic current expenditure form. Lower economic bound.</div>
+      </div>
+
+      <!-- 4. Naive Scraped Average -->
+      <div class="kpi-card kpi-naive">
+        <div class="kpi-header">
+          <span class="kpi-title">NAIVE AVERAGE (UNWEIGHTED)</span>
+          <span class="kpi-badge badge-crimson">FLAWED SCRAPER</span>
+        </div>
+        <div class="kpi-value" id="kpi-naive">106.45</div>
+        <div class="kpi-delta" id="kpi-naive-delta"><span class="delta-negative">+6.45% (Distorted)</span></div>
+        <div class="kpi-footnote">Unweighted average of price relatives. Fails Time-Reversal.</div>
+      </div>
+
+      <!-- 5. Sampling Distortion Peak -->
+      <div class="kpi-card kpi-bias">
+        <div class="kpi-header">
+          <span class="kpi-title">PEAK SAMPLING BIAS</span>
+          <span class="kpi-badge badge-rose">DAY 21 SHOCK</span>
+        </div>
+        <div class="kpi-value" id="kpi-peak-bias">+27.4 pts</div>
+        <div class="kpi-delta"><span class="delta-negative">Carli Upward Bias Killed</span></div>
+        <div class="kpi-footnote">Disproportionate T+1 ticket sampling eliminated by Jevons.</div>
+      </div>
+
+      <!-- 6. Total Microdata Observations -->
+      <div class="kpi-card kpi-pool">
+        <div class="kpi-header">
+          <span class="kpi-title">DATA WAREHOUSE OBSERVATIONS</span>
+          <span class="kpi-badge badge-gold">ACTIVE PANEL</span>
+        </div>
+        <div class="kpi-value" id="kpi-obs-count">8,435</div>
+        <div class="kpi-delta"><span class="delta-positive">8 Trunks × 5 Lead Buckets</span></div>
+        <div class="kpi-footnote">Automated Playwright &amp; GDS Microdata Ingestion Pipeline.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Interactive Tab Navigation (GIGW 3.0 Compliant) -->
+  <div class="tabs-nav-container">
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="tab-overview">
+        <span class="tab-icon">📈</span>
+        <span class="tab-label">Master Index Series (Chart A)</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-divergence">
+        <span class="tab-icon">⚖️</span>
+        <span class="tab-label">Sampling Bias &amp; Divergence</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-decomposition">
+        <span class="tab-icon">📊</span>
+        <span class="tab-label">Kitagawa Decomposition (Chart B)</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-curves">
+        <span class="tab-icon">⏳</span>
+        <span class="tab-label">Lead-Time Escalation Curves</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-table">
+        <span class="tab-icon">🏛️</span>
+        <span class="tab-label">DGCA Official Reconciliation</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 7. Tab Content Areas -->
+  <main class="main-content-wrapper">
+    <!-- Tab 1: Overview & Master Chart -->
+    <div class="tab-content active" id="tab-overview">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <h2 class="chart-title">राष्ट्रीय विमान किराया सूचकांक • Headline Fisher Ideal vs Laspeyres vs Paasche vs Naive</h2>
+            <p class="chart-subtitle">Daily chained superlative economic price index series benchmarked to Base Period (2026-07-01 = 100.00)</p>
+          </div>
+          <div class="chart-legend-pills">
+            <span class="pill pill-fisher">● Fisher Ideal (Headline)</span>
+            <span class="pill pill-lasp">● Laspeyres (Fixed Basket)</span>
+            <span class="pill pill-paasche">● Paasche (Dynamic)</span>
+            <span class="pill pill-naive">┄ Naive Scraper Average</span>
+          </div>
+        </div>
+        <div id="chart-divergence-div" style="width: 100%; height: 500px;"></div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Divergence Audit -->
+    <div class="tab-content" id="tab-divergence">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h2 class="chart-title">Statistical Divergence Audit • Naive Scraper vs True Fisher Ideal</h2>
+          <p class="chart-subtitle">Quantifying the +27.4 point upward distortion caused by unweighted arithmetic averaging of dynamic booking curves.</p>
+        </div>
+        <div style="padding: 20px; color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;">
+          <p>This diagnostic visualizes the divergence between the naive arithmetic mean of scraped airfares and the true Fisher Ideal Price Index. On Day 21, search scrapers sampled a disproportionate number of $T+1$ emergency tickets, creating an artificial +27.4 point surge. INDAIR's stratified Jevons aggregator completely eliminates this artifact.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Kitagawa Decomposition (Chart B) -->
+    <div class="tab-content" id="tab-decomposition">
+      <div class="chart-card">
+        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <div>
+            <h2 class="chart-title">Kitagawa Mathematical Decomposition • Pure Price vs Booking-Mix Shift</h2>
+            <p class="chart-subtitle">Exact algebraic isolation of pure price inflation from passenger booking-window drift.</p>
+          </div>
+          <div class="chart-controls">
+            <label for="decomp-date-select" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 600;">Select Date:</label>
+            <select id="decomp-date-select" class="select-input" style="padding: 6px 12px; background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;"></select>
+          </div>
+        </div>
+        <div class="decomp-metric-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 15px 0;">
+          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: #94a3b8;">BASE PERIOD FARE</div>
+            <div id="decomp-base-fare" style="font-size: 1.2rem; font-weight: 700; color: #f8fafc;">₹6,108</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: #94a3b8;">TARGET OBSERVED FARE</div>
+            <div id="decomp-target-fare" style="font-size: 1.2rem; font-weight: 700; color: #f8fafc;">₹7,836</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: #94a3b8;">TOTAL OBSERVED SHIFT</div>
+            <div id="decomp-total-delta" style="font-size: 1.2rem; font-weight: 700; color: #ef4444;">+28.29%</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: #94a3b8;">PURE PRICE INFLATION</div>
+            <div id="decomp-pure-price" style="font-size: 1.2rem; font-weight: 700; color: #34d399;">+6.13%</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: #94a3b8;">LEAD-TIME MIX SHIFT</div>
+            <div id="decomp-lead-mix" style="font-size: 1.2rem; font-weight: 700; color: #fbbf24;">+22.16%</div>
+          </div>
+        </div>
+        <div id="chart-waterfall-div" style="width: 100%; height: 420px;"></div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Escalation Curves -->
+    <div class="tab-content" id="tab-curves">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h2 class="chart-title">Advance Purchase Lead-Time Escalation Curves (Yield Management Term Structure)</h2>
+          <p class="chart-subtitle">Empirical booking curve gradient across domestic trunk corridors (T+45 down to T+1 emergency bookings).</p>
+        </div>
+        <div id="chart-curves-div" style="width: 100%; height: 450px;"></div>
+      </div>
+    </div>
+
+    <!-- Tab 5: DGCA Reconciliation -->
+    <div class="tab-content" id="tab-table">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h2 class="chart-title">DGCA Official Traffic Weight Bridge Reconciliation Protocol</h2>
+          <p class="chart-subtitle">Quarterly calibration between high-frequency daily scraped microdata and official DGCA passenger statistics.</p>
+        </div>
+        <div class="table-responsive" style="margin-top: 15px; overflow-x: auto;">
+          <table class="custom-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04);">
+                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">DOMESTIC ROUTE</th>
+                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">DGCA TRAFFIC WEIGHT</th>
+                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">BASE FARE (JEVONS)</th>
+                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">CURRENT FARE</th>
+                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">ROUTE INFLATION</th>
+                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="dgca-table-body">
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 10px 14px; font-weight: 600;">DEL-BOM (Delhi - Mumbai)</td>
+                <td style="padding: 10px 14px;">22.0%</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,420</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,821</td>
+                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+7.40%</td>
+                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 10px 14px; font-weight: 600;">BOM-DEL (Mumbai - Delhi)</td>
+                <td style="padding: 10px 14px;">20.0%</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,380</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,735</td>
+                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+6.60%</td>
+                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 10px 14px; font-weight: 600;">DEL-BLR (Delhi - Bengaluru)</td>
+                <td style="padding: 10px 14px;">16.0%</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹6,210</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹6,632</td>
+                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+6.80%</td>
+                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 10px 14px; font-weight: 600;">BOM-BLR (Mumbai - Bengaluru)</td>
+                <td style="padding: 10px 14px;">12.0%</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹4,120</td>
+                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹4,330</td>
+                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+5.10%</td>
+                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 8. Official Government Footer -->
+  <footer style="margin-top: 40px; padding: 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #94a3b8; font-size: 0.82rem;">
+    <div style="margin-bottom: 8px;">
+      <strong>भारत सरकार • GOVERNMENT OF INDIA</strong> • सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय (MoSPI)
+    </div>
+    <div>National Airfare Price Indexing Portal • Developed for Smart India Hackathon (SIH 2025) • System ID: SIH26056</div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
