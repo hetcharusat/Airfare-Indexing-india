@@ -278,13 +278,13 @@ export default function App() {
           </button>
 
           <a
-            href="http://localhost:8000"
+            href="/docs"
             target="_blank"
             rel="noreferrer"
             className="btn-secondary"
             style={{ textDecoration: 'none', fontSize: '0.78rem', padding: '6px 12px' }}
           >
-            <span>MoSPI Terminal</span>
+            <span>API Docs</span>
             <ArrowUpRight size={13} />
           </a>
         </div>
