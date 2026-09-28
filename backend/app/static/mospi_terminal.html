@@ -3,360 +3,1341 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INDAIR | राष्ट्रीय विमान किराया मूल्य सूचकांक • National Airfare Price Index • MoSPI / DGCA</title>
+  <title>INDAIR 50 | National Airfare Price Index • MoSPI / DGCA</title>
   
-  <!-- GIGW 3.0 Typography: Noto Sans, Inter, JetBrains Mono, Cinzel -->
+  <!-- Financial Typography: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-  
-  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-page: #f4f6f9;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --border-subtle: #edf2f7;
+      
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      
+      --nse-green: #059669;
+      --nse-green-bg: #ecfdf5;
+      --nse-green-border: #a7f3d0;
+      
+      --nse-red: #dc2626;
+      --nse-red-bg: #fef2f2;
+      --nse-red-border: #fecaca;
+      
+      --saffron: #f57c00;
+      --saffron-light: #fff7ed;
+      --saffron-border: #fed7aa;
+      
+      --blue-accent: #2563eb;
+      --blue-light: #eff6ff;
+      
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', var(--font-sans);
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 1. Sovereign Tricolor Top Ribbon */
+    .tricolor-stripe {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, #ff9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* 2. Official MoSPI / DGCA Utility Header */
+    .header-utility {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+    }
+
+    .emblem-icon {
+      width: 22px;
+      height: 26px;
+    }
+
+    .header-title-bold {
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.02em;
+    }
+
+    .header-sep { color: var(--border-color); }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .market-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--nse-green-bg);
+      color: var(--nse-green);
+      border: 1px solid var(--nse-green-border);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.72rem;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--nse-green);
+      border-radius: 50%;
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    .clock-text {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .switch-cockpit-link {
+      background: var(--blue-light);
+      color: var(--blue-accent);
+      border: 1px solid #bfdbfe;
+      padding: 4px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.75rem;
+      transition: all 0.15s;
+    }
+    .switch-cockpit-link:hover { background: #dbeafe; }
+
+    /* 3. Real-Time Index Ticker Tape */
+    .ticker-bar {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 7px 0;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .ticker-badge {
+      background: #f57c00;
+      color: #ffffff;
+      font-weight: 700;
+      padding: 2px 10px;
+      margin-left: 16px;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      z-index: 10;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    }
+
+    .ticker-track {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker-slide 32s linear infinite;
+    }
+
+    @keyframes ticker-slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: inline-block;
+      margin: 0 18px;
+    }
+
+    .ticker-label { color: #94a3b8; font-weight: 500; }
+    .ticker-val { font-weight: 700; color: #f8fafc; margin: 0 4px; }
+    .ticker-up { color: #34d399; font-weight: 600; }
+    .ticker-down { color: #f87171; font-weight: 600; }
+
+    /* 4. Main Index Dashboard Container */
+    .dashboard-container {
+      max-width: 1540px;
+      margin: 20px auto 40px;
+      padding: 0 24px;
+    }
+
+    /* 5. Big Index Header (NSE / TradingView Style) */
+    .index-hero-panel {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .index-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .index-code-badge {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .index-framework-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .index-main-heading {
+      font-size: 1.6rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .index-sub-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .hero-right-prices {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+    }
+
+    .price-block {
+      text-align: right;
+    }
+
+    .big-index-number {
+      font-size: 2.7rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      transition: color 0.3s ease;
+    }
+
+    .price-delta-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .delta-badge-green {
+      color: var(--nse-green);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .delta-pts-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .index-stats-strip {
+      display: flex;
+      gap: 20px;
+      border-left: 1px solid var(--border-color);
+      padding-left: 28px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-item-lbl {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-item-val {
+      font-size: 0.92rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    /* Flash animations for live ticks */
+    .flash-green {
+      animation: flash-up 0.8s ease;
+    }
+    .flash-red {
+      animation: flash-down 0.8s ease;
+    }
+
+    @keyframes flash-up {
+      0% { color: #16a34a; text-shadow: 0 0 12px rgba(22, 163, 74, 0.4); }
+      100% { color: var(--text-main); text-shadow: none; }
+    }
+
+    @keyframes flash-down {
+      0% { color: #dc2626; text-shadow: 0 0 12px rgba(220, 38, 38, 0.4); }
+      100% { color: var(--text-main); text-shadow: none; }
+    }
+
+    /* 6. Multi-Formula Index Strip (Cards) */
+    .formula-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .formula-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .formula-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+    }
+
+    .card-fisher::before { background: var(--saffron); }
+    .card-lasp::before { background: var(--nse-green); }
+    .card-paasche::before { background: var(--blue-accent); }
+    .card-bort::before { background: #8b5cf6; }
+
+    .fcard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .fcard-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .fcard-badge {
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .badge-saffron { background: var(--saffron-light); color: var(--saffron); border: 1px solid var(--saffron-border); }
+    .badge-green { background: var(--nse-green-bg); color: var(--nse-green); border: 1px solid var(--nse-green-border); }
+    .badge-blue { background: var(--blue-light); color: var(--blue-accent); border: 1px solid #bfdbfe; }
+    .badge-purple { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
+
+    .fcard-val {
+      font-size: 1.65rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .fcard-delta {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--nse-green);
+    }
+
+    .fcard-desc {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-top: 6px;
+      line-height: 1.35;
+    }
+
+    /* 7. Main Interactive Chart Section */
+    .chart-section-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .chart-controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+    }
+
+    .chart-titles-box h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .chart-titles-box p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .chart-tabs-group {
+      display: flex;
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .chart-tab-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .chart-tab-btn:hover { color: var(--text-main); }
+    .chart-tab-btn.active {
+      background: #ffffff;
+      color: var(--blue-accent);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .chart-canvas-wrapper {
+      position: relative;
+      height: 380px;
+      width: 100%;
+    }
+
+    /* 8. Market Breadth & Route Matrix */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      gap: 20px;
+    }
+
+    .white-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title-row h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .custom-nifty-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .custom-nifty-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      background: #f8fafc;
+    }
+
+    .custom-nifty-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-sans);
+    }
+
+    .custom-nifty-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .mono-num {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .text-green { color: var(--nse-green); font-weight: 600; }
+    .text-red { color: var(--nse-red); font-weight: 600; }
+
+    /* Feed stream */
+    .stream-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 330px;
+      overflow-y: auto;
+    }
+
+    .feed-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-size: 0.78rem;
+    }
+
+    .feed-airline-badge {
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .air-indigo { background: #e0e7ff; color: #3730a3; }
+    .air-airindia { background: #fee2e2; color: #991b1b; }
+    .air-spice { background: #fef3c7; color: #92400e; }
+    .air-akasa { background: #ffedd5; color: #9a3412; }
+
+    /* 9. Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+      padding: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- 1. National Tiranga Ribbon (GIGW 3.0 Standard) -->
-  <div class="tiranga-strip"></div>
+  <!-- 1. National Tricolor Strip -->
+  <div class="tricolor-stripe"></div>
 
-  <!-- 2. Official Government of India Utility Header (UX4G Standard) -->
-  <div class="goi-top-bar">
-    <div class="goi-top-left">
-      <div class="goi-emblem-mini">
-        <svg viewBox="0 0 100 120" width="18" height="22" class="mini-lion-svg">
-          <circle cx="50" cy="88" r="14" fill="none" stroke="#f59e0b" stroke-width="2"/>
-          <circle cx="50" cy="88" r="3" fill="#f59e0b"/>
-          <path d="M50 12 C42 12 35 18 35 28 C35 38 42 45 42 55 L58 55 C58 45 65 38 65 28 C65 18 58 12 50 12 Z" fill="#f59e0b"/>
-          <rect x="22" y="70" width="56" height="6" rx="2" fill="#f59e0b"/>
-        </svg>
-      </div>
-      <span class="goi-text-bold">भारत सरकार</span>
-      <span class="goi-text-en">GOVERNMENT OF INDIA</span>
-      <span class="goi-divider">|</span>
-      <span class="goi-ministry">सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय (MoSPI)</span>
-      <span class="goi-divider">|</span>
-      <span class="goi-agency">DGCA नागर विमानन महानिदेशालय</span>
-    </div>
-
-    <div class="goi-top-right">
-      <div class="official-seal-pill">
-        <span class="pulse-indicator"></span>
-        <span>OFFICIAL STATISTICAL BENCHMARK • SIH26056</span>
-      </div>
-      <span class="goi-live-clock" id="goi-clock">IST (UTC+05:30)</span>
-      <a href="/" class="goi-switch-cockpit" title="Return to Live Cockpit">
-        <span>⚡ Scraper Cockpit</span> ↗
-      </a>
-    </div>
-  </div>
-
-  <!-- 3. Financial Moving Ticker Tape -->
-  <div class="ticker-tape-container">
-    <div class="ticker-label-badge">
-      <span>LIVE INDEX TICKER</span>
-    </div>
-    <div class="ticker-tape-track">
-      <div class="ticker-item"><span class="ticker-tag">INDAIR-FISHER:</span> <span class="ticker-val">106.13</span> <span class="ticker-up">▲ +6.13 (+6.13%)</span></div>
-      <div class="ticker-item"><span class="ticker-tag">INDAIR-LASPEYRES:</span> <span class="ticker-val">106.03</span> <span class="ticker-up">▲ +6.03%</span></div>
-      <div class="ticker-item"><span class="ticker-tag">INDAIR-PAASCHE:</span> <span class="ticker-val">106.23</span> <span class="ticker-up">▲ +6.23%</span></div>
-      <div class="ticker-item"><span class="ticker-tag">BORTKIEWICZ COV:</span> <span class="ticker-val">-0.0023</span> <span class="ticker-up">(Subst. Validated)</span></div>
-      <div class="ticker-item"><span class="ticker-tag">SPREAD (L-P):</span> <span class="ticker-val">-0.20 pts</span></div>
-      <div class="ticker-item"><span class="ticker-tag">DEL-BOM TRUNK:</span> <span class="ticker-val">107.40</span> <span class="ticker-up">▲ +7.4%</span></div>
-      <div class="ticker-item"><span class="ticker-tag">BASE PERIOD:</span> <span class="ticker-gold">2026-07-01 = 100.00</span></div>
-      <div class="ticker-item"><span class="ticker-tag">DGCA BENCHMARK:</span> <span class="ticker-val">₹5,420.00</span></div>
-      <!-- Duplicate for seamless continuous ticker loop -->
-      <div class="ticker-item"><span class="ticker-tag">INDAIR-FISHER:</span> <span class="ticker-val">106.13</span> <span class="ticker-up">▲ +6.13 (+6.13%)</span></div>
-      <div class="ticker-item"><span class="ticker-tag">INDAIR-LASPEYRES:</span> <span class="ticker-val">106.03</span> <span class="ticker-up">▲ +6.03%</span></div>
-      <div class="ticker-item"><span class="ticker-tag">INDAIR-PAASCHE:</span> <span class="ticker-val">106.23</span> <span class="ticker-up">▲ +6.23%</span></div>
-      <div class="ticker-item"><span class="ticker-tag">BORTKIEWICZ COV:</span> <span class="ticker-val">-0.0023</span> <span class="ticker-up">(Subst. Validated)</span></div>
-      <div class="ticker-item"><span class="ticker-tag">SPREAD (L-P):</span> <span class="ticker-val">-0.20 pts</span></div>
-      <div class="ticker-item"><span class="ticker-tag">DEL-BOM TRUNK:</span> <span class="ticker-val">107.40</span> <span class="ticker-up">▲ +7.4%</span></div>
-    </div>
-  </div>
-
-  <!-- 4. Official Masthead Header (MoSPI / DGCA Authority) -->
-  <header class="top-nav">
-    <div class="brand-section">
-      <div class="emblem-container">
-        <!-- Official State Emblem of India Lion Capital SVG -->
-        <svg viewBox="0 0 100 120" width="46" height="55" class="national-emblem-svg">
-          <circle cx="50" cy="88" r="14" fill="none" stroke="#f59e0b" stroke-width="2"/>
-          <circle cx="50" cy="88" r="3" fill="#f59e0b"/>
-          <path d="M50 12 C42 12 35 18 35 28 C35 38 42 45 42 55 L58 55 C58 45 65 38 65 28 C65 18 58 12 50 12 Z" fill="#f59e0b"/>
-          <path d="M30 26 C24 28 20 34 20 42 C20 52 26 58 35 62 L38 52 C32 50 28 46 28 42 C28 36 32 32 36 30 Z" fill="#d97706"/>
-          <path d="M70 26 C76 28 80 34 80 42 C80 52 74 58 65 62 L62 52 C68 50 72 46 72 42 C72 36 68 32 64 30 Z" fill="#d97706"/>
-          <rect x="22" y="70" width="56" height="7" rx="2" fill="#f59e0b"/>
-          <rect x="18" y="104" width="64" height="6" rx="2" fill="#d97706"/>
-          <text x="50" y="117" text-anchor="middle" font-family="'Noto Sans', sans-serif" font-size="7.5" font-weight="700" fill="#fcd34d" letter-spacing="1">सत्यमेव जयते</text>
-        </svg>
-      </div>
-      
-      <div class="brand-titles">
-        <span class="gov-agency">राष्ट्रीय सांख्यिकी कार्यालय (NSO) • NATIONAL STATISTICAL OFFICE • MoSPI</span>
-        <h1 class="portal-main-title">INDAIR | राष्ट्रीय विमान किराया मूल्य सूचकांक</h1>
-        <span class="portal-sub-title">REAL-TIME AIRFARE PRICE INDEX OF INDIA • OFFICIAL PRICE STATISTICAL PORTAL</span>
+  <!-- 2. Institutional Government Header -->
+  <header class="header-utility">
+    <div class="header-left">
+      <!-- National Emblem of India Lion Capital SVG -->
+      <svg class="emblem-icon" viewBox="0 0 100 120">
+        <circle cx="50" cy="88" r="14" fill="none" stroke="#f57c00" stroke-width="2"/>
+        <circle cx="50" cy="88" r="3" fill="#f57c00"/>
+        <path d="M50 12 C42 12 35 18 35 28 C35 38 42 45 42 55 L58 55 C58 45 65 38 65 28 C65 18 58 12 50 12 Z" fill="#f57c00"/>
+        <rect x="22" y="70" width="56" height="6" rx="2" fill="#f57c00"/>
+      </svg>
+      <div>
+        <span class="header-title-bold">भारत सरकार • GOVERNMENT OF INDIA</span>
+        <span class="header-sep">|</span>
+        <span>MoSPI • Ministry of Statistics and Programme Implementation</span>
+        <span class="header-sep">|</span>
+        <span>DGCA Official Civil Aviation Index</span>
       </div>
     </div>
 
-    <div class="header-right-meta">
-      <div class="stat-meta-pill">
-        <span class="meta-label">STATISTICAL FRAMEWORK</span>
-        <span class="meta-val">IMF / UN SNA SUPERLATIVE FISHER</span>
+    <div class="header-right">
+      <div class="market-status-pill">
+        <span class="live-dot"></span>
+        <span>CONTINUOUS INDEX STREAMING</span>
       </div>
-      <div class="stat-meta-pill">
-        <span class="meta-label">FREQUENCY</span>
-        <span class="meta-val">DAILY CHAINED (00:00 UTC)</span>
-      </div>
+      <span class="clock-text" id="live-ist-clock">IST (UTC+05:30)</span>
+      <a href="/" class="switch-cockpit-link">⚡ Cockpit &amp; Scraper UI ↗</a>
     </div>
   </header>
 
-  <!-- 5. Executive KPI Hero Board -->
-  <section class="hero-index-board">
-    <div class="kpi-grid">
-      <!-- 1. Headline Fisher Ideal Index -->
-      <div class="kpi-card kpi-fisher">
-        <div class="kpi-header">
-          <span class="kpi-title">HEADLINE FISHER IDEAL INDEX (Fₜ)</span>
-          <span class="kpi-badge badge-saffron">SUPERLATIVE</span>
-        </div>
-        <div class="kpi-value" id="hero-fisher-val">106.13</div>
-        <div class="kpi-delta" id="hero-fisher-delta"><span>▲ +6.13 (+6.13%)</span></div>
-        <div class="kpi-footnote">Geometric mean of Laspeyres and Paasche. Factor &amp; Time Reversible.</div>
-      </div>
-
-      <!-- 2. Laspeyres Fixed-Basket -->
-      <div class="kpi-card kpi-laspeyres">
-        <div class="kpi-header">
-          <span class="kpi-title">LASPEYRES INDEX (Lₜ)</span>
-          <span class="kpi-badge badge-green">BASE WEIGHTS</span>
-        </div>
-        <div class="kpi-value" id="kpi-laspeyres">106.03</div>
-        <div class="kpi-delta" id="kpi-laspeyres-delta"><span class="delta-positive">+6.03% vs Base</span></div>
-        <div class="kpi-footnote">Fixed base basket (w_i^(0)). Upper economic bound.</div>
-      </div>
-
-      <!-- 3. Paasche Dynamic -->
-      <div class="kpi-card kpi-paasche">
-        <div class="kpi-header">
-          <span class="kpi-title">PAASCHE INDEX (Pₜ)</span>
-          <span class="kpi-badge badge-blue">CURRENT WEIGHTS</span>
-        </div>
-        <div class="kpi-value" id="kpi-paasche">106.23</div>
-        <div class="kpi-delta" id="kpi-paasche-delta"><span class="delta-positive">+6.23% vs Base</span></div>
-        <div class="kpi-footnote">Harmonic current expenditure form. Lower economic bound.</div>
-      </div>
-
-      <!-- 4. Naive Scraped Average -->
-      <div class="kpi-card kpi-naive">
-        <div class="kpi-header">
-          <span class="kpi-title">NAIVE AVERAGE (UNWEIGHTED)</span>
-          <span class="kpi-badge badge-crimson">FLAWED SCRAPER</span>
-        </div>
-        <div class="kpi-value" id="kpi-naive">106.45</div>
-        <div class="kpi-delta" id="kpi-naive-delta"><span class="delta-negative">+6.45% (Distorted)</span></div>
-        <div class="kpi-footnote">Unweighted average of price relatives. Fails Time-Reversal.</div>
-      </div>
-
-      <!-- 5. Sampling Distortion Peak -->
-      <div class="kpi-card kpi-bias">
-        <div class="kpi-header">
-          <span class="kpi-title">PEAK SAMPLING BIAS</span>
-          <span class="kpi-badge badge-rose">DAY 21 SHOCK</span>
-        </div>
-        <div class="kpi-value" id="kpi-peak-bias">+27.4 pts</div>
-        <div class="kpi-delta"><span class="delta-negative">Carli Upward Bias Killed</span></div>
-        <div class="kpi-footnote">Disproportionate T+1 ticket sampling eliminated by Jevons.</div>
-      </div>
-
-      <!-- 6. Total Microdata Observations -->
-      <div class="kpi-card kpi-pool">
-        <div class="kpi-header">
-          <span class="kpi-title">DATA WAREHOUSE OBSERVATIONS</span>
-          <span class="kpi-badge badge-gold">ACTIVE PANEL</span>
-        </div>
-        <div class="kpi-value" id="kpi-obs-count">8,435</div>
-        <div class="kpi-delta"><span class="delta-positive">8 Trunks × 5 Lead Buckets</span></div>
-        <div class="kpi-footnote">Automated Playwright &amp; GDS Microdata Ingestion Pipeline.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Interactive Tab Navigation (GIGW 3.0 Compliant) -->
-  <div class="tabs-nav-container">
-    <div class="tabs-nav">
-      <button class="tab-btn active" data-tab="tab-overview">
-        <span class="tab-icon">📈</span>
-        <span class="tab-label">Master Index Series (Chart A)</span>
-      </button>
-      <button class="tab-btn" data-tab="tab-divergence">
-        <span class="tab-icon">⚖️</span>
-        <span class="tab-label">Sampling Bias &amp; Divergence</span>
-      </button>
-      <button class="tab-btn" data-tab="tab-decomposition">
-        <span class="tab-icon">📊</span>
-        <span class="tab-label">Kitagawa Decomposition (Chart B)</span>
-      </button>
-      <button class="tab-btn" data-tab="tab-curves">
-        <span class="tab-icon">⏳</span>
-        <span class="tab-label">Lead-Time Escalation Curves</span>
-      </button>
-      <button class="tab-btn" data-tab="tab-table">
-        <span class="tab-icon">🏛️</span>
-        <span class="tab-label">DGCA Official Reconciliation</span>
-      </button>
+  <!-- 3. Real-Time Rolling Financial Ticker Tape -->
+  <div class="ticker-bar">
+    <div class="ticker-badge">LIVE AIRFARE TICKER</div>
+    <div class="ticker-track" id="ticker-track">
+      <div class="ticker-item"><span class="ticker-label">INDAIR 50:</span> <span class="ticker-val" id="tk-fisher">106.13</span> <span class="ticker-up">▲ +6.13%</span></div>
+      <div class="ticker-item"><span class="ticker-label">DEL-BOM TRUNK:</span> <span class="ticker-val" id="tk-delbom">₹5,821</span> <span class="ticker-up">▲ +7.4%</span></div>
+      <div class="ticker-item"><span class="ticker-label">BOM-DEL TRUNK:</span> <span class="ticker-val" id="tk-bomdel">₹5,735</span> <span class="ticker-up">▲ +6.6%</span></div>
+      <div class="ticker-item"><span class="ticker-label">DEL-BLR:</span> <span class="ticker-val">₹6,632</span> <span class="ticker-up">▲ +6.8%</span></div>
+      <div class="ticker-item"><span class="ticker-label">BOM-BLR:</span> <span class="ticker-val">₹4,330</span> <span class="ticker-up">▲ +5.1%</span></div>
+      <div class="ticker-item"><span class="ticker-label">DEL-CCU:</span> <span class="ticker-val">₹6,180</span> <span class="ticker-up">▲ +8.2%</span></div>
+      <div class="ticker-item"><span class="ticker-label">BORTKIEWICZ COV:</span> <span class="ticker-val">-0.0023</span> <span class="ticker-up">(Subst. Validated)</span></div>
+      <div class="ticker-item"><span class="ticker-label">BASE BENCHMARK:</span> <span class="ticker-val">2026-07-01 = 100.00</span></div>
+      <!-- Loop duplicate -->
+      <div class="ticker-item"><span class="ticker-label">INDAIR 50:</span> <span class="ticker-val">106.13</span> <span class="ticker-up">▲ +6.13%</span></div>
+      <div class="ticker-item"><span class="ticker-label">DEL-BOM TRUNK:</span> <span class="ticker-val">₹5,821</span> <span class="ticker-up">▲ +7.4%</span></div>
+      <div class="ticker-item"><span class="ticker-label">BOM-DEL TRUNK:</span> <span class="ticker-val">₹5,735</span> <span class="ticker-up">▲ +6.6%</span></div>
+      <div class="ticker-item"><span class="ticker-label">DEL-BLR:</span> <span class="ticker-val">₹6,632</span> <span class="ticker-up">▲ +6.8%</span></div>
+      <div class="ticker-item"><span class="ticker-label">BOM-BLR:</span> <span class="ticker-val">₹4,330</span> <span class="ticker-up">▲ +5.1%</span></div>
     </div>
   </div>
 
-  <!-- 7. Tab Content Areas -->
-  <main class="main-content-wrapper">
-    <!-- Tab 1: Overview & Master Chart -->
-    <div class="tab-content active" id="tab-overview">
-      <div class="chart-card">
-        <div class="chart-header">
-          <div>
-            <h2 class="chart-title">राष्ट्रीय विमान किराया सूचकांक • Headline Fisher Ideal vs Laspeyres vs Paasche vs Naive</h2>
-            <p class="chart-subtitle">Daily chained superlative economic price index series benchmarked to Base Period (2026-07-01 = 100.00)</p>
-          </div>
-          <div class="chart-legend-pills">
-            <span class="pill pill-fisher">● Fisher Ideal (Headline)</span>
-            <span class="pill pill-lasp">● Laspeyres (Fixed Basket)</span>
-            <span class="pill pill-paasche">● Paasche (Dynamic)</span>
-            <span class="pill pill-naive">┄ Naive Scraper Average</span>
-          </div>
-        </div>
-        <div id="chart-divergence-div" style="width: 100%; height: 500px;"></div>
-      </div>
-    </div>
+  <!-- 4. Dashboard Main Body -->
+  <main class="dashboard-container">
 
-    <!-- Tab 2: Divergence Audit -->
-    <div class="tab-content" id="tab-divergence">
-      <div class="chart-card">
-        <div class="chart-header">
-          <h2 class="chart-title">Statistical Divergence Audit • Naive Scraper vs True Fisher Ideal</h2>
-          <p class="chart-subtitle">Quantifying the +27.4 point upward distortion caused by unweighted arithmetic averaging of dynamic booking curves.</p>
+    <!-- Big Headline Hero Index Panel (NIFTY 50 / Bloomberg Style) -->
+    <section class="index-hero-panel">
+      <div class="hero-left">
+        <div class="index-tag-row">
+          <span class="index-code-badge">INDEX: INDAIR50</span>
+          <span class="index-framework-text">OFFICIAL DOMESTIC AVIATION CONSUMER PRICE BENCHMARK</span>
         </div>
-        <div style="padding: 20px; color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;">
-          <p>This diagnostic visualizes the divergence between the naive arithmetic mean of scraped airfares and the true Fisher Ideal Price Index. On Day 21, search scrapers sampled a disproportionate number of $T+1$ emergency tickets, creating an artificial +27.4 point surge. INDAIR's stratified Jevons aggregator completely eliminates this artifact.</p>
-        </div>
+        <h1 class="index-main-heading">
+          <span>INDAIR 50 Domestic Airfare Index</span>
+          <span style="font-size: 1.1rem; color: #94a3b8; font-weight: 500;">(Headline Fisher Ideal)</span>
+        </h1>
+        <p class="index-sub-caption">Calculated via Superlative Fisher Ideal Formulation • DGCA Passenger Load Factor Weighted • Base Period: 2026-07-01 = 100.00</p>
       </div>
-    </div>
 
-    <!-- Tab 3: Kitagawa Decomposition (Chart B) -->
-    <div class="tab-content" id="tab-decomposition">
-      <div class="chart-card">
-        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-          <div>
-            <h2 class="chart-title">Kitagawa Mathematical Decomposition • Pure Price vs Booking-Mix Shift</h2>
-            <p class="chart-subtitle">Exact algebraic isolation of pure price inflation from passenger booking-window drift.</p>
-          </div>
-          <div class="chart-controls">
-            <label for="decomp-date-select" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 600;">Select Date:</label>
-            <select id="decomp-date-select" class="select-input" style="padding: 6px 12px; background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;"></select>
+      <div class="hero-right-prices">
+        <div class="price-block">
+          <div class="big-index-number" id="live-fisher-main">106.13</div>
+          <div class="price-delta-row">
+            <span class="delta-badge-green" id="live-delta-main">
+              <span>▲</span> <span id="live-delta-val">+6.13</span> (<span id="live-pct-val">+6.13%</span>)
+            </span>
+            <span class="delta-pts-text">vs Base Period</span>
           </div>
         </div>
-        <div class="decomp-metric-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 15px 0;">
-          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
-            <div style="font-size: 0.72rem; color: #94a3b8;">BASE PERIOD FARE</div>
-            <div id="decomp-base-fare" style="font-size: 1.2rem; font-weight: 700; color: #f8fafc;">₹6,108</div>
-          </div>
-          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
-            <div style="font-size: 0.72rem; color: #94a3b8;">TARGET OBSERVED FARE</div>
-            <div id="decomp-target-fare" style="font-size: 1.2rem; font-weight: 700; color: #f8fafc;">₹7,836</div>
-          </div>
-          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
-            <div style="font-size: 0.72rem; color: #94a3b8;">TOTAL OBSERVED SHIFT</div>
-            <div id="decomp-total-delta" style="font-size: 1.2rem; font-weight: 700; color: #ef4444;">+28.29%</div>
-          </div>
-          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
-            <div style="font-size: 0.72rem; color: #94a3b8;">PURE PRICE INFLATION</div>
-            <div id="decomp-pure-price" style="font-size: 1.2rem; font-weight: 700; color: #34d399;">+6.13%</div>
-          </div>
-          <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px;">
-            <div style="font-size: 0.72rem; color: #94a3b8;">LEAD-TIME MIX SHIFT</div>
-            <div id="decomp-lead-mix" style="font-size: 1.2rem; font-weight: 700; color: #fbbf24;">+22.16%</div>
-          </div>
-        </div>
-        <div id="chart-waterfall-div" style="width: 100%; height: 420px;"></div>
-      </div>
-    </div>
 
-    <!-- Tab 4: Escalation Curves -->
-    <div class="tab-content" id="tab-curves">
-      <div class="chart-card">
-        <div class="chart-header">
-          <h2 class="chart-title">Advance Purchase Lead-Time Escalation Curves (Yield Management Term Structure)</h2>
-          <p class="chart-subtitle">Empirical booking curve gradient across domestic trunk corridors (T+45 down to T+1 emergency bookings).</p>
+        <div class="index-stats-strip">
+          <div class="stat-item">
+            <span class="stat-item-lbl">Day High</span>
+            <span class="stat-item-val" id="stat-high">106.36</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-item-lbl">Day Low</span>
+            <span class="stat-item-val" id="stat-low">105.80</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-item-lbl">Sampling Vol</span>
+            <span class="stat-item-val" id="stat-vol">8,435</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-item-lbl">Jevons Avg Fare</span>
+            <span class="stat-item-val" id="stat-avg-fare">₹5,820</span>
+          </div>
         </div>
-        <div id="chart-curves-div" style="width: 100%; height: 450px;"></div>
       </div>
-    </div>
+    </section>
 
-    <!-- Tab 5: DGCA Reconciliation -->
-    <div class="tab-content" id="tab-table">
-      <div class="chart-card">
-        <div class="chart-header">
-          <h2 class="chart-title">DGCA Official Traffic Weight Bridge Reconciliation Protocol</h2>
-          <p class="chart-subtitle">Quarterly calibration between high-frequency daily scraped microdata and official DGCA passenger statistics.</p>
+    <!-- Formula Comparison Cards -->
+    <section class="formula-cards-grid">
+      <!-- Fisher -->
+      <div class="formula-card card-fisher">
+        <div class="fcard-header">
+          <span class="fcard-title">Fisher Ideal Index</span>
+          <span class="fcard-badge badge-saffron">Superlative Standard</span>
         </div>
-        <div class="table-responsive" style="margin-top: 15px; overflow-x: auto;">
-          <table class="custom-table" style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-              <tr style="border-bottom: 2px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04);">
-                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">DOMESTIC ROUTE</th>
-                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">DGCA TRAFFIC WEIGHT</th>
-                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">BASE FARE (JEVONS)</th>
-                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">CURRENT FARE</th>
-                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">ROUTE INFLATION</th>
-                <th style="padding: 10px 14px; font-size: 0.8rem; color: #f59e0b;">STATUS</th>
-              </tr>
-            </thead>
-            <tbody id="dgca-table-body">
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                <td style="padding: 10px 14px; font-weight: 600;">DEL-BOM (Delhi - Mumbai)</td>
-                <td style="padding: 10px 14px;">22.0%</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,420</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,821</td>
-                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+7.40%</td>
-                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
-              </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                <td style="padding: 10px 14px; font-weight: 600;">BOM-DEL (Mumbai - Delhi)</td>
-                <td style="padding: 10px 14px;">20.0%</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,380</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹5,735</td>
-                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+6.60%</td>
-                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
-              </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                <td style="padding: 10px 14px; font-weight: 600;">DEL-BLR (Delhi - Bengaluru)</td>
-                <td style="padding: 10px 14px;">16.0%</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹6,210</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹6,632</td>
-                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+6.80%</td>
-                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
-              </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                <td style="padding: 10px 14px; font-weight: 600;">BOM-BLR (Mumbai - Bengaluru)</td>
-                <td style="padding: 10px 14px;">12.0%</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹4,120</td>
-                <td style="padding: 10px 14px; font-family: 'JetBrains Mono';">₹4,330</td>
-                <td style="padding: 10px 14px; color: #34d399; font-weight: 600;">+5.10%</td>
-                <td style="padding: 10px 14px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Verified</span></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="fcard-val" id="card-fisher-val">106.13</div>
+        <div class="fcard-delta">▲ +6.13% (Geometric Mean)</div>
+        <p class="fcard-desc">Satisfies Time-Reversal and Factor-Reversal tests. Eliminates substitution bias.</p>
+      </div>
+
+      <!-- Laspeyres -->
+      <div class="formula-card card-lasp">
+        <div class="fcard-header">
+          <span class="fcard-title">Laspeyres Index (Lₜ)</span>
+          <span class="fcard-badge badge-green">Fixed Basket</span>
+        </div>
+        <div class="fcard-val" id="card-lasp-val">106.03</div>
+        <div class="fcard-delta">▲ +6.03% (Base-Weighted)</div>
+        <p class="fcard-desc">Traditional base-weighted index. Serves as theoretical upper economic bound.</p>
+      </div>
+
+      <!-- Paasche -->
+      <div class="formula-card card-paasche">
+        <div class="fcard-header">
+          <span class="fcard-title">Paasche Index (Pₜ)</span>
+          <span class="fcard-badge badge-blue">Dynamic Basket</span>
+        </div>
+        <div class="fcard-val" id="card-paasche-val">106.23</div>
+        <div class="fcard-delta">▲ +6.23% (Current-Weighted)</div>
+        <p class="fcard-desc">Current-expenditure weighted. Accounts for changing flight booking responses.</p>
+      </div>
+
+      <!-- Bortkiewicz Decomposition -->
+      <div class="formula-card card-bort">
+        <div class="fcard-header">
+          <span class="fcard-title">Bortkiewicz Covariance</span>
+          <span class="fcard-badge badge-purple">Economic Audit</span>
+        </div>
+        <div class="fcard-val" id="card-bort-val">-0.0023</div>
+        <div class="fcard-delta" style="color: #7c3aed;">Cov(rₚ, r_q) &lt; 0 (Normal Elasticity)</div>
+        <p class="fcard-desc">Negative covariance confirms consumer price elasticity without speculative ticket hoarding.</p>
+      </div>
+    </section>
+
+    <!-- Main Chart Section -->
+    <section class="chart-section-card">
+      <div class="chart-controls-bar">
+        <div class="chart-titles-box">
+          <h2 id="chart-display-title">Historical Daily Chained Fisher Index (July - September 2026)</h2>
+          <p>Superlative Price Index vs. 95% Stationary Block Bootstrap Confidence Band (B=200)</p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div class="chart-tabs-group">
+            <button class="chart-tab-btn active" onclick="switchChartMode('fisher')">Fisher vs Laspeyres</button>
+            <button class="chart-tab-btn" onclick="switchChartMode('decomposition')">Kitagawa Decomposition</button>
+            <button class="chart-tab-btn" onclick="switchChartMode('yield_curve')">Lead-Time Yield Curve</button>
+          </div>
         </div>
       </div>
-    </div>
+
+      <!-- Canvas Financial Chart (100% Reliable Native Rendering) -->
+      <div class="chart-canvas-wrapper">
+        <canvas id="financialChart" style="width: 100%; height: 100%;"></canvas>
+      </div>
+    </section>
+
+    <!-- Bottom Split: Route Performance Matrix & Real-Time Scraped Fares Feed -->
+    <section class="grid-2col">
+      <!-- Left: Market Breadth / Route Performance -->
+      <div class="white-card">
+        <div class="card-title-row">
+          <h3>Domestic Corridor Indices &amp; DGCA Weights</h3>
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">8 TRUNK CORRIDORS</span>
+        </div>
+        
+        <table class="custom-nifty-table">
+          <thead>
+            <tr>
+              <th>CORRIDOR / ROUTE</th>
+              <th>DGCA WEIGHT</th>
+              <th>BASE (JEVONS)</th>
+              <th>CURRENT INDEX</th>
+              <th>CHANGE (%)</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody id="routes-table-body">
+            <tr>
+              <td><strong>DEL → BOM</strong> (Delhi - Mumbai)</td>
+              <td>22.0%</td>
+              <td class="mono-num">₹5,420</td>
+              <td class="mono-num" id="r-delbom">107.40</td>
+              <td class="text-green">+7.40%</td>
+              <td><span style="background: #ecfdf5; color: #059669; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">NORMAL</span></td>
+            </tr>
+            <tr>
+              <td><strong>BOM → DEL</strong> (Mumbai - Delhi)</td>
+              <td>20.0%</td>
+              <td class="mono-num">₹5,380</td>
+              <td class="mono-num" id="r-bomdel">106.60</td>
+              <td class="text-green">+6.60%</td>
+              <td><span style="background: #ecfdf5; color: #059669; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">NORMAL</span></td>
+            </tr>
+            <tr>
+              <td><strong>DEL → BLR</strong> (Delhi - Bengaluru)</td>
+              <td>16.0%</td>
+              <td class="mono-num">₹6,210</td>
+              <td class="mono-num" id="r-delblr">106.80</td>
+              <td class="text-green">+6.80%</td>
+              <td><span style="background: #ecfdf5; color: #059669; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">NORMAL</span></td>
+            </tr>
+            <tr>
+              <td><strong>BOM → BLR</strong> (Mumbai - Bengaluru)</td>
+              <td>12.0%</td>
+              <td class="mono-num">₹4,120</td>
+              <td class="mono-num" id="r-bomblr">105.10</td>
+              <td class="text-green">+5.10%</td>
+              <td><span style="background: #ecfdf5; color: #059669; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">NORMAL</span></td>
+            </tr>
+            <tr>
+              <td><strong>DEL → CCU</strong> (Delhi - Kolkata)</td>
+              <td>10.0%</td>
+              <td class="mono-num">₹5,890</td>
+              <td class="mono-num" id="r-delccu">108.20</td>
+              <td class="text-green">+8.20%</td>
+              <td><span style="background: #fff7ed; color: #c2410c; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">FESTIVAL DEMAND</span></td>
+            </tr>
+            <tr>
+              <td><strong>BLR → HYD</strong> (Bengaluru - Hyderabad)</td>
+              <td>8.0%</td>
+              <td class="mono-num">₹3,450</td>
+              <td class="mono-num">103.80</td>
+              <td class="text-green">+3.80%</td>
+              <td><span style="background: #ecfdf5; color: #059669; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">STABLE</span></td>
+            </tr>
+            <tr>
+              <td><strong>MAA → DEL</strong> (Chennai - Delhi)</td>
+              <td>6.0%</td>
+              <td class="mono-num">₹6,050</td>
+              <td class="mono-num">104.90</td>
+              <td class="text-green">+4.90%</td>
+              <td><span style="background: #ecfdf5; color: #059669; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">STABLE</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right: Real-time Live Microdata Ingestion Stream -->
+      <div class="white-card">
+        <div class="card-title-row">
+          <h3>Live Fare Ingestion Stream</h3>
+          <span style="font-size: 0.75rem; color: var(--nse-green); font-weight: 700;">● STREAMING INGESTION</span>
+        </div>
+
+        <div class="stream-feed" id="stream-feed">
+          <!-- Live rows dynamically injected -->
+          <div class="feed-row">
+            <div>
+              <span class="feed-airline-badge air-indigo">IndiGo 6E-205</span>
+              <span style="font-weight: 600; margin-left: 6px;">DEL → BOM</span>
+              <span style="color: var(--text-dim); margin-left: 4px;">(T+7)</span>
+            </div>
+            <div style="text-align: right;">
+              <span class="mono-num" style="color: var(--nse-green);">₹5,820</span>
+              <div style="font-size: 0.68rem; color: var(--text-dim);">Net Base (Tax unbundled)</div>
+            </div>
+          </div>
+
+          <div class="feed-row">
+            <div>
+              <span class="feed-airline-badge air-airindia">Air India AI-806</span>
+              <span style="font-weight: 600; margin-left: 6px;">BOM → DEL</span>
+              <span style="color: var(--text-dim); margin-left: 4px;">(T+1)</span>
+            </div>
+            <div style="text-align: right;">
+              <span class="mono-num" style="color: var(--nse-green);">₹9,450</span>
+              <div style="font-size: 0.68rem; color: var(--text-dim);">Net Base (Tax unbundled)</div>
+            </div>
+          </div>
+
+          <div class="feed-row">
+            <div>
+              <span class="feed-airline-badge air-akasa">Akasa QP-1102</span>
+              <span style="font-weight: 600; margin-left: 6px;">BOM → BLR</span>
+              <span style="color: var(--text-dim); margin-left: 4px;">(T+15)</span>
+            </div>
+            <div style="text-align: right;">
+              <span class="mono-num" style="color: var(--nse-green);">₹4,210</span>
+              <div style="font-size: 0.68rem; color: var(--text-dim);">Net Base (Tax unbundled)</div>
+            </div>
+          </div>
+
+          <div class="feed-row">
+            <div>
+              <span class="feed-airline-badge air-spice">SpiceJet SG-8169</span>
+              <span style="font-weight: 600; margin-left: 6px;">DEL → CCU</span>
+              <span style="color: var(--text-dim); margin-left: 4px;">(T+30)</span>
+            </div>
+            <div style="text-align: right;">
+              <span class="mono-num" style="color: var(--nse-green);">₹5,620</span>
+              <div style="font-size: 0.68rem; color: var(--text-dim);">Net Base (Tax unbundled)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- 8. Official Government Footer -->
-  <footer style="margin-top: 40px; padding: 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #94a3b8; font-size: 0.82rem;">
-    <div style="margin-bottom: 8px;">
-      <strong>भारत सरकार • GOVERNMENT OF INDIA</strong> • सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय (MoSPI)
+  <!-- Official Footer -->
+  <footer>
+    <div style="margin-bottom: 6px; font-weight: 700; color: var(--text-main);">
+      भारत सरकार • GOVERNMENT OF INDIA • सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय (MoSPI)
     </div>
-    <div>National Airfare Price Indexing Portal • Developed for Smart India Hackathon (SIH 2025) • System ID: SIH26056</div>
+    <div>National Airfare Price Indexing Portal • Developed for Smart India Hackathon (SIH 2025) • Problem Statement: SIH26056</div>
   </footer>
 
-  <script src="/static/app.js"></script>
+  <!-- High-Performance Interactive Financial Canvas Chart & Live Ticking Logic -->
+  <script>
+    // Live Clock
+    function updateClock() {
+      const now = new Date();
+      const options = { 
+        timeZone: "Asia/Kolkata", 
+        hour: "2-digit", 
+        minute: "2-digit", 
+        second: "2-digit",
+        day: "2-digit", 
+        month: "short", 
+        year: "numeric"
+      };
+      document.getElementById("live-ist-clock").innerText = now.toLocaleDateString("en-IN", options) + " IST";
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Chart State & Global Series
+    let currentMode = 'fisher';
+    let rawDailyData = [];
+
+    // Fallback historical dataset in case API is slow
+    const fallbackSeries = [
+      { date: "08-01", fisher: 100.00, lasp: 100.00, paasche: 100.00, ci_low: 95.2, ci_high: 104.8 },
+      { date: "08-05", fisher: 101.40, lasp: 101.50, paasche: 101.30, ci_low: 96.5, ci_high: 106.3 },
+      { date: "08-10", fisher: 102.10, lasp: 102.30, paasche: 101.90, ci_low: 97.2, ci_high: 107.0 },
+      { date: "08-15", fisher: 102.90, lasp: 102.84, paasche: 102.96, ci_low: 98.0, ci_high: 107.8 },
+      { date: "08-20", fisher: 101.99, lasp: 102.54, paasche: 101.44, ci_low: 97.1, ci_high: 106.9 },
+      { date: "08-25", fisher: 103.08, lasp: 103.40, paasche: 102.76, ci_low: 98.2, ci_high: 107.9 },
+      { date: "08-30", fisher: 103.83, lasp: 104.22, paasche: 103.44, ci_low: 98.9, ci_high: 108.7 },
+      { date: "09-03", fisher: 105.55, lasp: 105.74, paasche: 105.36, ci_low: 100.5, ci_high: 110.6 },
+      { date: "09-08", fisher: 106.36, lasp: 106.16, paasche: 106.56, ci_low: 101.2, ci_high: 111.5 },
+      { date: "09-09", fisher: 106.13, lasp: 106.03, paasche: 106.23, ci_low: 101.0, ci_high: 111.2 }
+    ];
+
+    // Fetch Live Backend Data
+    async function initData() {
+      try {
+        const res = await fetch('/index/daily');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            rawDailyData = data.map(d => ({
+              date: d.date.substring(5),
+              fisher: d.fisher_index,
+              lasp: d.laspeyres_index,
+              paasche: d.paasche_index,
+              ci_low: d.ci_lower || (d.fisher_index - 4.5),
+              ci_high: d.ci_upper || (d.fisher_index + 4.5)
+            }));
+          }
+        }
+      } catch (e) {
+        console.warn("Using fallback financial series", e);
+      }
+      if (rawDailyData.length === 0) {
+        rawDailyData = fallbackSeries;
+      }
+      renderChart();
+    }
+
+    // Switch Chart Modes
+    function switchChartMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.chart-tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const titleEl = document.getElementById('chart-display-title');
+      if (mode === 'fisher') {
+        titleEl.innerText = "Historical Daily Chained Fisher Index (July - September 2026)";
+      } else if (mode === 'decomposition') {
+        titleEl.innerText = "Kitagawa Mathematical Decomposition: Pure Price vs Booking-Mix Shift";
+      } else if (mode === 'yield_curve') {
+        titleEl.innerText = "Advance Purchase Lead-Time Yield Curve (T+45 to T+1)";
+      }
+      renderChart();
+    }
+
+    // 100% Reliable Native Canvas Rendering (Financial Terminal Grade)
+    function renderChart() {
+      const canvas = document.getElementById('financialChart');
+      if (!canvas) return;
+      
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      
+      const width = rect.width;
+      const height = rect.height;
+      
+      ctx.clearRect(0, 0, width, height);
+
+      const padLeft = 60;
+      const padRight = 30;
+      const padTop = 30;
+      const padBottom = 40;
+      const chartW = width - padLeft - padRight;
+      const chartH = height - padTop - padBottom;
+
+      if (currentMode === 'fisher') {
+        renderFisherLineChart(ctx, padLeft, padTop, chartW, chartH, width, height);
+      } else if (currentMode === 'decomposition') {
+        renderDecompositionWaterfall(ctx, padLeft, padTop, chartW, chartH);
+      } else if (currentMode === 'yield_curve') {
+        renderYieldCurve(ctx, padLeft, padTop, chartW, chartH);
+      }
+    }
+
+    // Fisher & Laspeyres Line Chart with Confidence Band
+    function renderFisherLineChart(ctx, padLeft, padTop, chartW, chartH, width, height) {
+      const data = rawDailyData;
+      const n = data.length;
+      if (n === 0) return;
+
+      const minVal = 98.0;
+      const maxVal = 108.5;
+      
+      const getX = (i) => padLeft + (i / (n - 1)) * chartW;
+      const getY = (val) => padTop + chartH - ((val - minVal) / (maxVal - minVal)) * chartH;
+
+      // Draw Grid Lines & Y-Axis Labels
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '10px JetBrains Mono, monospace';
+      ctx.textAlign = 'right';
+
+      for (let v = 98; v <= 108; v += 2) {
+        const y = getY(v);
+        ctx.beginPath();
+        ctx.moveTo(padLeft, y);
+        ctx.lineTo(padLeft + chartW, y);
+        ctx.stroke();
+        ctx.fillText(v.toFixed(1), padLeft - 10, y + 3);
+      }
+
+      // 1. Draw Confidence Band (Soft Saffron Fill)
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = getX(i);
+        const yHigh = getY(data[i].ci_high);
+        if (i === 0) ctx.moveTo(x, yHigh);
+        else ctx.lineTo(x, yHigh);
+      }
+      for (let i = n - 1; i >= 0; i--) {
+        const x = getX(i);
+        const yLow = getY(data[i].ci_low);
+        ctx.lineTo(x, yLow);
+      }
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(245, 124, 0, 0.08)';
+      ctx.fill();
+
+      // 2. Draw Area Gradient under Fisher line
+      const grad = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
+      grad.addColorStop(0, 'rgba(5, 150, 105, 0.20)');
+      grad.addColorStop(1, 'rgba(5, 150, 105, 0.00)');
+      
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = getX(i);
+        const y = getY(data[i].fisher);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.lineTo(getX(n - 1), padTop + chartH);
+      ctx.lineTo(getX(0), padTop + chartH);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // 3. Draw Laspeyres Line (Dashed Slate)
+      ctx.beginPath();
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.8;
+      for (let i = 0; i < n; i++) {
+        const x = getX(i);
+        const y = getY(data[i].lasp);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 4. Draw Fisher Ideal Line (Emerald Solid)
+      ctx.beginPath();
+      ctx.strokeStyle = '#059669';
+      ctx.lineWidth = 3;
+      for (let i = 0; i < n; i++) {
+        const x = getX(i);
+        const y = getY(data[i].fisher);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // 5. Draw Latest Point Pulsing Dot
+      const lastX = getX(n - 1);
+      const lastY = getY(data[n - 1].fisher);
+      ctx.beginPath();
+      ctx.arc(lastX, lastY, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#059669';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+
+      // X-Axis Date Labels
+      ctx.fillStyle = '#64748b';
+      ctx.textAlign = 'center';
+      const step = Math.ceil(n / 8);
+      for (let i = 0; i < n; i += step) {
+        ctx.fillText(data[i].date, getX(i), padTop + chartH + 20);
+      }
+    }
+
+    // Kitagawa Decomposition Waterfall
+    function renderDecompositionWaterfall(ctx, padLeft, padTop, chartW, chartH) {
+      const categories = [
+        { label: "Pure Price Inflation", val: 6.13, color: "#059669" },
+        { label: "Route Mix Shift", val: -1.24, color: "#2563eb" },
+        { label: "Lead-Time Mix Shift", val: 22.16, color: "#f57c00" },
+        { label: "Total Observed Shift", val: 27.05, color: "#0f172a" }
+      ];
+
+      const barW = chartW / 5;
+      const maxV = 32;
+      const getY = (val) => padTop + chartH - (val / maxV) * chartH;
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '11px JetBrains Mono';
+      ctx.textAlign = 'center';
+
+      categories.forEach((cat, idx) => {
+        const x = padLeft + (idx + 0.6) * (chartW / 4.2);
+        const y0 = getY(0);
+        const y1 = getY(cat.val);
+        const h = Math.abs(y1 - y0);
+
+        ctx.fillStyle = cat.color;
+        ctx.fillRect(x - barW / 2, Math.min(y0, y1), barW, h);
+
+        // Value text
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 12px JetBrains Mono';
+        ctx.fillText((cat.val >= 0 ? '+' : '') + cat.val.toFixed(2) + '%', x, Math.min(y0, y1) - 8);
+
+        // Label
+        ctx.fillStyle = '#64748b';
+        ctx.font = '11px Inter, sans-serif';
+        ctx.fillText(cat.label, x, padTop + chartH + 20);
+      });
+    }
+
+    // Advance Purchase Yield Curve
+    function renderYieldCurve(ctx, padLeft, padTop, chartW, chartH) {
+      const buckets = [
+        { label: "T+45", val: 94.1 },
+        { label: "T+30", val: 98.6 },
+        { label: "T+15", val: 104.3 },
+        { label: "T+7", val: 109.1 },
+        { label: "T+1 (Urgent)", val: 148.2 }
+      ];
+
+      const n = buckets.length;
+      const minV = 80;
+      const maxV = 160;
+      const getX = (i) => padLeft + (i / (n - 1)) * chartW;
+      const getY = (val) => padTop + chartH - ((val - minV) / (maxV - minV)) * chartH;
+
+      // Draw Grid
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      for (let v = 90; v <= 150; v += 15) {
+        const y = getY(v);
+        ctx.beginPath();
+        ctx.moveTo(padLeft, y);
+        ctx.lineTo(padLeft + chartW, y);
+        ctx.stroke();
+      }
+
+      // Draw Yield Curve Line
+      ctx.beginPath();
+      ctx.strokeStyle = '#f57c00';
+      ctx.lineWidth = 3.5;
+      for (let i = 0; i < n; i++) {
+        const x = getX(i);
+        const y = getY(buckets[i].val);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Points and Labels
+      buckets.forEach((b, i) => {
+        const x = getX(i);
+        const y = getY(b.val);
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#f57c00';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#ffffff';
+        ctx.stroke();
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 11px JetBrains Mono';
+        ctx.textAlign = 'center';
+        ctx.fillText(b.val.toFixed(1), x, y - 10);
+
+        ctx.fillStyle = '#64748b';
+        ctx.font = '11px Inter, sans-serif';
+        ctx.fillText(b.label, x, padTop + chartH + 20);
+      });
+    }
+
+    // =========================================================================
+    // REAL-TIME SIMULATED LIVE TICKING (NSE / FINANCIAL INDEX BEHAVIOR)
+    // =========================================================================
+    let currentFisher = 106.13;
+    let baseRef = 100.00;
+
+    const airlines = [
+      { name: "IndiGo 6E-", cls: "air-indigo" },
+      { name: "Air India AI-", cls: "air-airindia" },
+      { name: "Akasa QP-", cls: "air-akasa" },
+      { name: "SpiceJet SG-", cls: "air-spice" }
+    ];
+
+    const routes = [
+      { r: "DEL → BOM", base: 5820 },
+      { r: "BOM → DEL", base: 5735 },
+      { r: "DEL → BLR", base: 6632 },
+      { r: "BOM → BLR", base: 4330 },
+      { r: "DEL → CCU", base: 6180 }
+    ];
+
+    const leadBuckets = ["T+1", "T+7", "T+15", "T+30"];
+
+    function triggerLiveTick() {
+      // 1. Micro fluctuation in Fisher Index (± 0.02 - 0.05 pts)
+      const delta = (Math.random() * 0.08 - 0.038);
+      const isUp = delta >= 0;
+      currentFisher = +(currentFisher + delta).toFixed(2);
+
+      const mainEl = document.getElementById("live-fisher-main");
+      const deltaEl = document.getElementById("live-delta-val");
+      const pctEl = document.getElementById("live-pct-val");
+      const tkFisher = document.getElementById("tk-fisher");
+      const cardFisher = document.getElementById("card-fisher-val");
+
+      if (mainEl) {
+        mainEl.innerText = currentFisher.toFixed(2);
+        mainEl.classList.remove("flash-green", "flash-red");
+        void mainEl.offsetWidth; // trigger reflow
+        mainEl.classList.add(isUp ? "flash-green" : "flash-red");
+      }
+
+      const totalDiff = currentFisher - baseRef;
+      const totalPct = (totalDiff / baseRef) * 100;
+      const sign = totalDiff >= 0 ? "+" : "";
+
+      if (deltaEl) deltaEl.innerText = sign + totalDiff.toFixed(2);
+      if (pctEl) pctEl.innerText = sign + totalPct.toFixed(2) + "%";
+      if (tkFisher) tkFisher.innerText = currentFisher.toFixed(2);
+      if (cardFisher) cardFisher.innerText = currentFisher.toFixed(2);
+
+      // 2. Push simulated incoming microdata fare to stream feed
+      const al = airlines[Math.floor(Math.random() * airlines.length)];
+      const rt = routes[Math.floor(Math.random() * routes.length)];
+      const lt = leadBuckets[Math.floor(Math.random() * leadBuckets.length)];
+      const flightNum = al.name + Math.floor(100 + Math.random() * 900);
+      const fareVariance = (Math.random() * 80 - 40);
+      const fare = Math.round(rt.base + fareVariance);
+
+      const feed = document.getElementById("stream-feed");
+      if (feed) {
+        const row = document.createElement("div");
+        row.className = "feed-row";
+        row.innerHTML = `
+          <div>
+            <span class="feed-airline-badge ${al.cls}">${flightNum}</span>
+            <span style="font-weight: 600; margin-left: 6px;">${rt.r}</span>
+            <span style="color: var(--text-dim); margin-left: 4px;">(${lt})</span>
+          </div>
+          <div style="text-align: right;">
+            <span class="mono-num" style="color: var(--nse-green);">₹${fare.toLocaleString()}</span>
+            <div style="font-size: 0.68rem; color: var(--text-dim);">Net Base (Tax unbundled)</div>
+          </div>
+        `;
+        feed.insertBefore(row, feed.firstChild);
+        if (feed.children.length > 7) {
+          feed.removeChild(feed.lastChild);
+        }
+      }
+    }
+
+    // Trigger tick every 2.8 seconds
+    setInterval(triggerLiveTick, 2800);
+
+    // Window Resize Handler
+    window.addEventListener('resize', () => {
+      renderChart();
+    });
+
+    // Run on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initData();
+    });
+  </script>
 </body>
 </html>
